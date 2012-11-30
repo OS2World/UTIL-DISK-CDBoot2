@@ -1,0 +1,257 @@
+;**********************************************************************
+;                               CDBoot/2                             
+;               Copyright (C) by Stangl Roman, 2000, 2002            
+; This Code may be freely distributed, provided the Copyright isn't
+; removed, under the conditions indicated in the documentation.
+;
+; CB2xx.txt    NLS messages file, to support another language create
+;              a copy of this file containing translated messages and
+;              replace xx (for example) by:
+;                  Us ... for US English
+;                  Gr ... for German
+;                  Fr ... for French
+;              And then run the application with the commandline option
+;              -Language Gr (for German,...). Don't forget that
+;              CB2xx.rc also needs to be translated.
+;
+;**********************************************************************
+;
+; Messages 0001 to 0100 are reserved for the UStartup tartup code and
+; must not be changed for all applications using UStartup
+;
+CB2
+CB20000I: I CB2Us.msg
+CB20001E: E Can't load message %1 from messagefile %2. Please report this problem to the author.
+CB20002I: I Can't load message from NLS (National Language Support) message file, trying US English version.
+CB20003E: E Can't load message from NLS (National Language Support) and from US English message files. CD Boot/2 can't continue, press "Close" to exit.
+CB20004E: E Error SYS%1 writing to logfile %2. CD Boot/2 will not write a logfile.
+CB20005I: I DLL execution failed! CD Boot/2 can't continue, press the "%1" pushbutton to exit.
+CB20006I: I Press the "%1" pushbutton to exit CD Boot/2.
+CB20007I: X                                 CD Boot/2 V2.00
+CB20008I: X              (C) Roman Stangl (Roman_Stangl@at.ibm.com)  05, 2002
+CB20009I: X               http://www.geocities.com/SiliconValley/Pines/7885/
+CB20010I: X Close
+CB20011I: I Initializing CD Boot/2 environment ...
+CB20012I: I Loading CD Boot/2 messagefile ...
+CB20013I: I CD Boot/2 runs under the %1 evironment ...
+CB20014I: I Loading CD Boot/2 modules ...
+CB20015I: I Loading CD Boot/2 resource DLL ...
+CB20016I: I Error loading messagefile "%1". Messages might be displayed in English instead!
+CB20017I: I Error SYS%1 loading CD Boot/2 resource DLL "%2", module "%3" contributed to the failure. CD Boot/2 terminates.
+Please try to specify a supported language (e.g. English with "/Language Us") on the commandline when launching CD Boot/2. 
+Resource will therefore be loaded in English! CD Boot/2 terminates if that doesn't work too.
+CB20018E: E Wrong version of resource DLL "%1", OS/2's BLDLEVEL command can be used to display the version of a module. CD Boot/2 terminates.
+CB20019I: I Loading CD Boot/2 compiler runtime DLLs %1 ... 
+CB20020E: E Error SYS%1 loading CD Boot/2 compiler runtime DLL "%2", module "%3" contributed to the failure.
+Please check your environment if that DLL is installed correctly! CD Boot/2 terminates.
+CB20021I: I Loading CD Boot/2 code DLL ...
+CB20022E: E Error SYS%1 loading CD Boot/2 code DLL "%2", module "%3" contributed to the failure.
+Please check your environment if that DLL is installed correctly! CD Boot/2 terminates.
+CB20023E: E Wrong version of code DLL "%1", OS/2's BLDLEVEL command can be used to display the version of a module. CD Boot/2 terminates.
+CB20024E: E Error SYS%1 loading code entrypoint from CD Boot/2 code DLL "%2". CD Boot/2 terminates.
+CB20025E: E Can't startup thread to execute CD Boot/2 code DLL "%1". CD Boot/2 terminates.
+CB20026I:
+CB20027I:
+CB20028I:
+CB20029I:
+CB20030I:
+CB20031I:
+CB20032I:
+CB20033I:
+CB20034I:
+CB20035I:
+CB20036I:
+CB20037I:
+CB20038I:
+CB20039I:
+CB20040I:
+CB20041I:
+CB20042I:
+CB20043I:
+CB20044I:
+CB20045I:
+CB20046I:
+CB20047I:
+CB20048I:
+CB20049I:
+;
+; Messages 0050 to 0060 are application specific used in UStartup and user code
+;
+CB20050I: I Syntax: CDBOOT/CDBOOTPM [/?] [/LANGUAGE ll] [/LOG [logfile]] 
+          [/CID cidfile] [/DRIVE d /TIMEOUT tt] [/CPYCOLOR c]
+          [/MSG1 message] [/MSG2 message] [/MSG3 message] [/MSGCOLOR m] 
+          [/HARDDISK | /REMOVEABLE] [/CLEAR] [/BM] [/PASSWORD password]
+          Where:  
+                  ?  ........ Shows this help
+                  ll ........ Language to use (CB2ll.msg is required, 
+                              otherwise English is used as the default)
+                  logfile ... Optional logfile (default: CB2.LOG)
+                  cidfile ... File to read commandline parameters from
+                  d  ........ Bootable removeable media to install CD Boot/2
+                              onto (A, B, ..., Z)
+                  tt ........ Timeout for CD Boot/2 to continue booting from 
+                              first harddisk (1...60) 
+                  c ......... Copyright message color (0...15)
+                  message ... Custom message to be displayed by CD Boot/2
+                              (max. 79 characters)
+                  m ......... Custom message color (0...15)
+                  password .. Password to boot from removeable media (max. 7 
+                              characters, 0...9, A...Z, a...z)
+          Return code:
+                  0  ........ Successful completion
+                  1  ........ Warning, invalid parameter
+                  2  ........ Fatal, internal processing error
+CB20051I: I Syntax: CDBOOT/CDBOOTPM [/?] [/LANGUAGE ll] [/LOG [logfile]] [/CID cidfile] [/DRIVE d /TIMEOUT tt] [/CPYCOLOR c] [/MSG1 message] [/MSG2 message] [/MSG3 message] [/MSGCOLOR m] [/PASSWORD password]
+          Where:  
+                  ?  ........ Shows this help
+                  ll ........ Language to use (CB2ll.msg is required, otherwise English is used as the default)
+                  logfile ... Optional logfile (default: CB2.LOG)
+                  cidfile ... File to read commandline parameters from
+                  d  ........ Bootable removeable media to install CD Boot/2 onto (A, B, ..., Z)
+                  tt ........ Timeout for CD Boot/2 to continue booting from first harddisk (1...60) 
+                  c ......... Copyright message color (0...15)
+                  message ... Custom message to be displayed by CD Boot/2 (max. 79 characters)
+                  m ......... Custom message color (0...15)
+                  password .. Password to boot from removeable media (max. 7 characters, 0...9, A...Z, a...z)
+          Return code:
+                  0  ........ No error, successful completion
+                  1  ........ Warning, invalid parameter specified
+                  2  ........ Fatal internal process error
+CB20052E: E Optional parameter "/DRIVE d" (where "d" is a removeable media e.g. A) incomplete or invalid. CD Boot/2 terminates.
+CB20053E: E Optional parameter "/TIMEOUT tt" (where "tt" is the timeout period in the range of 1 to 60 seconds) incomplete or invalid. CD Boot/2 terminates.
+CB20054E: E Optional parameters "/DRIVE d" und "/TIMEOUT tt" must be specified simultaneously! CD Boot/2 terminates.
+CB20055E: E Optional parameters "/HARDDISK" und "/REMOVEABLE" must not be specified simultaneously! CD Boot/2 terminates.
+CB20056I: I Supported commandline parameters are valid and will be used.
+CB20057E: E Optional parameter "/MSG? message" has excessive length (>79 characters) for "message". CD Boot/2 terminates.
+CB20058E: E Optional parameter "/PASSWORD password" has excessive length (>7 characters) or invalid characters (that is not 0...9, A...Z, a...z). CD Boot/2 terminates.
+CB20059I: I Supplied parameters are sufficient, CD Boot/2 runs unattendedly.
+CB20060I:
+CB20061I:
+CB20062I:
+CB20063I:
+CB20064I:
+;
+; Messages 0065 and above are available for user messages in user code
+;
+CB20065I:
+CB20066I:
+CB20067I:
+CB20068I:
+CB20069I:
+CB20070E: E Creation of anchor block failed with error 0x%1. CD Boot/2 terminates.
+CB20071E: E Creation of message queue failed with error 0x%1. CD Boot/2 terminates.
+CB20072E: E Creation of dialog window failed with error 0x%1. CD Boot/2 terminates.
+CB20073E: E Opening the requested removeable media failed with error SYS%1. CD Boot/2 terminates.
+CB20074E: E Locking the requested removeable media failed with error SYS%1. CD Boot/2 terminates.
+CB20075E: E Reading/Writing the Boot Sector failed with error SYS%1. CD Boot/2 terminates.
+CB20076E: E Closing the requested removeable media failed with error SYS%1. CD Boot/2 terminates.
+CB20077E: E Reading/Writing CD2BOOT failed. CD Boot/2 terminates.
+CB20078E: E Invalid contents in CD2BOOT, please try to reinstall. CD Boot/2 terminates.
+CB20079E: E Invalid Boot Sector, reference to "OS2BOOT" is missing. Please ensure that you select an OS/2 Boot Sector from a removeable media. CD Boot/2 terminates.
+CB20080I: I The drive(s) %1 seem to support removeable media on which the CD Boot/2 Boot Loader can be installed onto.
+CB20081I: Q On which drive to you want to install CD Boot/2? 
+CB20082I: I CD Boot/2 allows to define a period from %1 to %2 seconds in which pressing the keys 1 or 2 allows you to boot from another media than the default selection.
+CB20083I: Q How many seconds should CD Boot/2 wait?
+CB20084I: I Reading the bootsector from the removeable media %1.
+CB20085I: I Reading the CD2BOOT code from file %1.
+CB20086W: W The bootsector of the removeable media %1 was already modified by running CD Boot/2! CD Boot/2 will act accordingly.
+CB20087I: I The bootsector of the removeable media looks like a FAT based non-OS/2 bootsector (e.g. from DOS). Likely it is compatible with CD Boot/2.
+CB20088W: W The bootsector of the removeable media does not look like an OS/2 or compatible FAT based non-OS/2 bootsector. Likely it is incompatible with CD Boot/2!
+CB20089I: I Writing the CD2BOOT code into file %1.
+CB20090I: I Modifying the bootsector of the removeable media to load CD2BOOT instead of OS2BOOT.
+CB20091I: I Writing the modified bootsector onto the removeable media %1.
+CB20092I: X CD2BOOT - CD Boot/2 V2.00
+CB20093I:
+CB20094I:
+CB20095I:
+CB20096I:
+CB20097I:
+CB20098I: I Initializing CD Boot/2 ...
+CB20099I: I Waiting for CD Boot/2 to terminate ...
+CB20100I: X CD2BOOT - CD Boot/2 V2.00
+CB20101I: X Copyright (C) Roman Stangl (Roman_Stangl@at.ibm.com) 05, 2002
+CB20102I: X           http://www.geocities.com/SiliconValley/Pines/7885/
+CB20103I: X Please press the key for the media ( is default) you want to boot from:
+CB20104I: X   1 ... From the first harddisk
+CB20105I: X   2 ... From the removeable media
+CB20106I: X Please select within %d seconds, or boot continues from the default media!
+CB20107I: X Continuing booting from removeable media ...
+CB20108I: X Continuing booting from first harddisk ...
+CB20109I: X CD2Boot SYS02025: Disk read error loading partition table from first harddisk!
+CB20110I: X CD2Boot SYS02027: Insert a system diskette and restart the system!
+CB20111I: X Please enter Password to boot removeable media: 
+CB20112I: X Invalid Password, please retry or press ALT+CTRL+DEL to reboot:  
+CB20113I: X No active OS/2 Bootmanager Partition found in partition table.
+CB20114I: X Active OS/2 Bootmanager Partition found in partition table.
+CB20115I: X CD2BOOT is corrupt or fragmented - System stopped! Press ALT+CTRL+DEL to reboot!   
+CB20116I:
+CB20117I:
+CB20118I:
+CB20119I:
+CB20120I:
+CB20121I:
+CB20122I:
+CB20123I:
+CB20124I:
+CB20125I:
+CB20126I:
+CB20127I:
+CB20128I:
+CB20129I:
+CB20130I:
+CB20131I:
+CB20132I:
+CB20133I:
+CB20134I:
+CB20135I:
+CB20136I:
+CB20137I:
+CB20138I:
+CB20139I:
+CB20140I:
+CB20141I:
+CB20142I:
+CB20143I:
+CB20144I:
+CB20145I:
+CB20146I:
+CB20147I:
+CB20148I:
+CB20149I:
+CB20150I: X CD Boot/2 Boot Loader "CD2BOOT" Settings:    
+CB20151I: X Installation:                                
+CB20152I: X Install on Drive:                            
+CB20153I: X Path of CD2BOOT code:                        
+CB20154I: X Delay [seconds]:                             
+CB20155I: X Default is ~Harddisk Boot
+CB20156I: X Default is ~Removeable Boot
+CB20157I: X Clear ~BIOS Screen
+CB20158I: X Optional Password Protection:                
+CB20159I: X ~Activate
+CB20160I: X Advanced Harddisk Boot
+CB20161I: X Acti~vate
+CB20162I: X Copyright Messages:               
+CB20163I: X Optional Userdefined Messages:               
+CB20164I: X ~Install                                     
+CB20165I: X ~Cancel                                      
+CB20166I: X Color
+CB20167I: X Black
+CB20168I: X Blue
+CB20169I: X Green
+CB20170I: X Cyan
+CB20171I: X Red
+CB20172I: X Magenta
+CB20173I: X Brown
+CB20174I: X White
+CB20175I: X Gray
+CB20176I: X Light Blue
+CB20177I: X Light Green
+CB20178I: X Light Cyan
+CB20179I: X Light Red
+CB20180I: X Light Magenta
+CB20181I: X Yellow
+CB20182I: X Intensive White
+CB20183I:
+CB20184I:
+CB20185I:
+

@@ -1,0 +1,940 @@
+<!doctype html public "-//IETF//DTD HTML 3.2//EN">
+<html>
+<head>
+<center><title>The official CD Boot/2 help page</title></center>
+<meta name="description" content="Official CD Boot/2 help page">
+<meta name="keywords" content="Roman Stangl, CD Boot/2, CD boot loader, OS/2, official release">
+<meta name="owner"    content="Roman_Stangl@at.ibm.com">
+<meta name="review"   content="22.05.2002">
+<meta name="security" content="public">
+</head>
+<body background="..\Images\Os2Warp.gif">
+<font Face="Helv,Helvetica,Arial">
+<h1>The CD Boot/2 help page</h1>
+<p>
+<h2>CD Boot/2's AVIO version</h2>
+<p>
+Running <b>CDBOOT.EXE</b> allows you to configure and install CD Boot/2
+from any OS/2 window or fullscreen, even from the OS/2 fullscreen you can
+obtain by booting OS/2 into a OS/2 fullscreen session via <b>ALT+F1</b>
+(however, in that case the settings in <b>CB2.INI</b> will not be used,
+because access to INI files is only possible if PM is up and running).
+<p>
+Running <b>CDBOOT.EXE</b> usually looks like (where <b>P:</b> is a
+virtual diskette drive, that is a kind of RAM-Drive that is much faster
+to access than a real floppy disk):
+<p>
+</font>
+<xmp>
+CB20011I: Initializing CD Boot/2 environment ...
+CB20012I: Loading CD Boot/2 messagefile ...
+                                CD Boot/2 V2.00
+             (C) Roman Stangl (Roman_Stangl@at.ibm.com)  05, 2002
+              http://www.geocities.com/SiliconValley/Pines/7885/
+CB20013I: CD Boot/2 runs under the PM evironment ...
+CB20021I: Loading CD Boot/2 code DLL ...
+CB20098I: Initializing CD Boot/2 ...
+CB20080I: The drive(s) A, B, M, P seem to support removeable media on which the
+CD Boot/2 Boot Loader can be installed onto.
+CB20081Q: On which drive to you want to install CD Boot/2? P
+CB20082I: CD Boot/2 allows to define a period from 1 to 60 seconds in which
+pressing the keys 1 or 2 allows you to boot from another media than the default
+selection.
+CB20083Q: How many seconds should CD Boot/2 wait? 10
+CB20084I: Reading the bootsector from the removeable media P:.
+CB20085I: Reading the CD2BOOT code from file
+H:\PROGRAMMING\CDBOOT2\SOURCE\CD2BOOT.
+CB20086W: The bootsector of the removeable media
+H:\PROGRAMMING\CDBOOT2\SOURCE\CD2BOOT was already modified by running CD
+Boot/2! CD Boot/2 will act accordingly.
+CB20089I: Writing the CD2BOOT code into file P:\CD2BOOT.
+CB20090I: Modifying the bootsector of the removeable media to load CD2BOOT
+instead of OS2BOOT.
+CB20091I: Writing the modified bootsector onto the removeable media P:.
+CB20099I: Waiting for CD Boot/2 to terminate ...
+</xmp>
+<font Face="Helv,Helvetica,Arial">
+<p>
+In above example, CD Boot/2 prompts you to enter the 
+removeable media (at question CB20081Q) where CD Boot/2 should install its
+enhanced Boot Loader <b>CD2BOOT</b> onto and the Timeout Period (at message
+CB20083Q) after which boot continues from the default selection (customizeable
+via the commandline parameters <b>/Harddisk</b>, <b>/Removeable</b> and 
+<b>/BM</b>).
+<p>
+Another example, running the commandline <b>CDBOOT /Drive P /Timeout 10</b> might
+result in the following log: 
+</font>
+<xmp>
+CB20011I: Initializing CD Boot/2 environment ...
+CB20012I: Loading CD Boot/2 messagefile ...
+                                CD Boot/2 V2.00
+             (C) Roman Stangl (Roman_Stangl@at.ibm.com)  05, 2002
+              http://www.geocities.com/SiliconValley/Pines/7885/
+CB20013I: CD Boot/2 runs under the PM evironment ...
+CB20021I: Loading CD Boot/2 code DLL...
+CB20060I: Initializing CD Boot/2 ...
+CB20056I: Commandline parameters "/DRIVE p /TIMEOUT 10 /MSG? message /PASSWORD
+password" are valid and will be used.
+CB20084I: Reading the bootsector from the removeable media Q:.
+CB20085I: Reading the CD2BOOT code from file H:\CDBOOT2\SOURCE\CD2BOOT.
+CB20086W: The bootsector from the removeable media H:\CDBOOT2\SOURCE\CD2BOOT
+was already modified by running CD Boot/2! CD Boot/2 will act accordingly.
+CB20087I: Writing the CD2BOOT code into file Q:\CD2BOOT.
+CB20088I: Modifying the OS/2 bootsector to load CD2BOOT instead of OS2BOOT.
+CB20089I: Writing the modified bootsector onto the removeable media Q:.
+CB20061I: Waiting for CD Boot/2 to terminate ...
+</xmp>
+<font Face="Helv,Helvetica,Arial">
+<p>
+In this example, CD Boot/2 runs without any further manual intervention from 
+the user. 
+This can be useful if you want to run CD Boot/2 unattendedly.
+<p>
+If you want to run CD Boot/2 interactively, I suggest to use the PM version
+<b>CDBOOTPM.EXE</b> as it looks much better and allows user friendly fine
+tuning of all options.
+<p>
+<h2>CD Boot/2's PM version</h2>
+<p>
+There are mainly two ways to run <b>CDBOOTPM.EXE</b>:
+<ol>
+<li>If you supply the commandline parameters <b>/Drive d</b> and 
+<b>/Timeout tt</b> which are minimally required to run CD Boot/2 without
+any user intervention, just the Logo window is displayed where the
+progress is displayed.
+<li>If you don't supply commandline parameters, CD Boot/2 will
+display the Logo window and finally on top of that the Configuration 
+Dialog window.
+</ol>
+<p>
+Now let's take a look into the details.
+The first window is the Logo (or About) window, which shows the application
+your are running and the status messages (to display status and error
+messages).
+<p>
+<center><img src="CDBoot2Logo.gif"></center>
+<p>
+While running the PM version of CD Boot/2, the Logo window contains a single
+multiline statustext that shows the last message CD Boot/2 considered important
+for you to know.
+When CD Boot/2 has finished execution, a <b>Close</b> pushbutton will be
+displayed, and the single multiline statustext changes to a multiline
+entryfield where you can scroll through all messages that were displayed
+while you had be running CD Boot/2.
+<p>
+More important is the CD Boot/2 Configuration Dialog window, which is the 
+center where you control how CD Boot/2 will behave once installed onto a 
+removeable media.
+<p>
+<center><img src="CDBoot2Dialog.gif"></center>
+<p>
+The dialog consists of the following main areas:
+<ul>
+<li>the <b>Installation</b> area telling you:
+    <ol>
+    <li>where you can select on which drive containing removeable medias CD Boot/2 
+        should install on (the drives CD Boot/2 detects as removeable are show,
+        however if one is missing you can still specify a different one),
+    <li>where CD Boot/2 will load the code from that will be patched according
+        to your selections and then installed on the selected removeable media
+    <li>what Timeout Period will be used until CD Boot/2 defaults to boot from
+        the default media,
+    <li>where you can define which selection should be the default one (either
+        the first Harddisk or the removeable media), that is the one that is 
+        selected automatically if the Timeout Period expires,
+    <li>where you can request CD Boot/2 to clear the screen before displaying
+        its menu (to remove e.g. BIOS messages left on the screen) and 
+        immediately before booting from the selected media (to remove the messages
+        displayed by CD Boot/2 itself).
+    </ol>
+    <p>
+<li>the <b>Optional Password Protection</b> area allows you:
+    <ol>
+    <li>to specify a case sensitive password of up to 7 characters that must be 
+        entered in order that CD Boot/2 will boot from the removeable media.
+    </ol>
+    <p>
+<li>the <b>Advanced Harddisk Boot</b> area allows you:
+    <ol>
+    <li>to specify, that if an active OS/2 Bootmanager on the first harddisk is found,
+        CD Boot/2 will ignore the user's selection from which medium to boot by
+        default, and always default to a Harddisk boot.
+    </ol>
+    <p>
+<li>the <b>Copyright Messages</b> informing you:
+    <ol>
+    <li>about the Copyright messages that will be displayed by CD Boot/2 when it
+        boots from the removeable media. CD Boot/2 displays 3 lines of up to 79 
+        characters, by default these lines are for your information only and thus
+        read-only.
+    <li>If you really have a need to customize them (e.g. the <b>Optional
+        Userdefined Messages</b> have not enough space to display all information
+        you want to) please <a href="mailto:Roman_Stangl@at.ibm.com">e-mail</a>
+        me for an undocumented parameter allowing you to customize them.
+    </ol>
+    <p>
+<li>the <b>Optional Userdefined Messages</b> area giving you:
+    <ol>
+    <li>the chance to instruct CD Boot/2 to display up to 3 lines of up the 
+        79 characters, immediately after the CD Boot/2 copyright when booting from
+        the removeable media (allowing you some customization, e.g. if you want
+        to use CD Boot/2 for a demo CD-ROM and want to add your own Copyright info
+        for the contents of the CD-ROM, as shown in above example).
+    </ol>
+</ul>
+<p>
+Above settings would display the following screen when booting from the removeable
+media and an active OS/2 Bootmanager was found on the first harddisk:
+</font>
+<xmp>
+CD2BOOT - CD Boot/2 V2.00
+Copyright (C) Roman Stangl (Roman_Stangl@at.ibm.com) 05, 2002
+          http://www.geocities.com/SiliconValley/Pines/7885/
+
+Welcome to the bootable installation CD-ROM for EasyRestore
+Copyright (C) Interactive Magic, 2002
+
+Active OS/2 Bootmanager Partition found in partition table.
+
+Continuing booting from first harddisk ...
+</xmp>
+<font Face="Helv,Helvetica,Arial">
+<p>
+Above screen can also be optained when running CD Boot/2 with the option <b>/Cid
+Sample.cid</b>.
+This option requests CD Boot/2 to read options from a file named <b>Sample.cid</b>
+(which is shipped with CD Boot/2 as a sample) in addition (and with higher precedence) 
+to the options specfied on the commandline.
+It may look like:
+</font>
+<xmp>
+#
+# To request CD Boot/2 to read the options (commandline parameters)
+# from this file, just run: CDBoot/CDBootPM /Cid Sample.cid
+#
+/MSG1 "Welcome to the bootable installation CD-ROM for EasyRestore"
+/MSG3 Copyright (C) Interactive Magic, 2002
+; Additional parameters
+/Harddisk
+/Clear
+/BM
+/Password Aurora
+</xmp>
+<font Face="Helv,Helvetica,Arial">
+<p>
+As outlined before, CD Boot/2 will only work correctly when <b>CD2BOOT</b> has been
+written onto the removeable media without fragmentation.
+Fragmentation on a FAT drive occurs if the clusters (a cluster is the smallest unit
+FAT uses to access a file, a cluster is minimally 512 bytes - the sector size - and
+maximally 32kB) of a file reside not adjacent on a media.
+Due to space constraints of the boot sector - which as it name applies must fit
+completely into a 512 byte sized sector - it will only load the first cluster of a
+file it the file is fragmented, instead of the other clusters random data is loaded
+from the media.
+<p>
+You can certainly imagine that <b>CD2BOOT</b> will process incorrectly, fail or even
+hang when it hasn't been loaded correctly.
+To circumvent that (as it isn't easily visible to a user if a file is fragmented unless
+one is using filesystem tools), <b>CD2BOOT</b> checks itself for having been loaded 
+correctly by the removeable media boot sector.
+Technically <b>CDBOOT.EXE</b> and <b>CDBOOTPM.EXE</b> will write a checksum into
+<b>CD2BOOT</b> after it has been customized, and <b>CD2BOOT</b> will recalculate
+that checksum upon invocation.
+If the recalculation of that checksum fails, <b>CD2BOOT</b> will halt the system
+with the following message:
+</font>
+<xmp>
+CD2BOOT is fragmented - System stopped! Press ALT+CTRL+DEL to reboot!
+</xmp>
+<font Face="Helv,Helvetica,Arial">
+<p>
+To recover simply remove the removeable media and restart your PC.
+To get a working CD Boot/2 system you would have to defragment the removeable
+media you applied CD Boot/2 on.
+<br>
+I personally use the <b>DEFRAG.EXE</b> from my PC DOS 2000 partition (though
+it only works consistently when doing a full optimization) to defragment the
+<b>VFDISK</b> I run CD Boot/2 against before creating an image out of it.
+<p>
+<h2>CD Boot/2 errors</h2>
+<p>
+Beside the following error messages, a bootable OS/2 CD-ROM modified by CD Boot/2
+might not work if the file <b>CD2BOOT</b> is not continuous, that is when it
+is fragmented.
+As the removeable media is formatted with a FAT filesystem you can use any FAT
+defragmenter to clean up that situtation.
+However, I've never experienced such a problem, so I think it is more a theoretical
+one.
+<p>
+The following error messages might be displayed during execution of
+the <b>CD Boot/2</b> executables <b>CDBOOT</b> and <b>CDBOOTPM</b>:
+<p>
+</font>
+<table BORDER=2 CELLSPACING=2 CELLPADDING=2 WIDTH="100%">
+<tr>
+<td WIDTH="30%"><center>Message</center></td>
+<td WIDTH="70%"><center>Explanation</center></td>
+</tr>
+<tr>
+<td>CB20050I<br>CD20051I</td>
+<td>CD Boot/2 could not understand the commandline you supplied and shows the supported
+options. Please spedify a valid commandline.</td>
+</tr>
+<tr>
+<td>CB20052E</td>
+<td>CD Boot/2 detected that you specified the commandline option <b>/DRIVE d</b>,
+however the option is either incomplete (e.g. <b>d</b> is missing) or invalid
+(e.g. <b>d</b> is not a drive letter in the (case insensitive) range A to Z).
+Please correct that option.</td>
+</tr>
+<tr>
+<td>CB20053E</td>
+<td>CD Boot/2 detected that you specified the commandline option <b>/TIMEOUT tt</b>,
+however the option is either incomplete (e.g. <b>tt</b> is missing) or invalid
+(e.g. <b>tt</b> is not numeric or not in the range of 1 to 60).
+Please correct that option.</td>
+</tr>
+<tr>
+<td>CB20054E</td>
+<td>CD Boot/2 requires that you use the commandline options <b>/DRIVE d</b> and
+<b>/TIMEOUT tt</b> simultaneously, because only when both are supplied CD Boot/2
+is able to run unattendedly.
+Please be sure you specify both options or none of them at all.</td>
+</tr>
+<tr>
+<td>CB20055E</td>
+<td>CD Boot/2 requires that you do not use the commandline options <b>/HARDDISK</b> and
+<b>/REMOVEABLE</b> simultaneously, because only one can be specified.
+Please be sure you specify only one options or none of them at all.</td>
+</tr>
+<tr>
+<td>CB20056I</td>
+<td>CD Boot/2 could successfully parse the commandline options <b>/DRIVE d</b>,
+<b>/TIMEOUT tt</b>, <b>/MSG? message</b>, <b>/HARDDISK</b>, <b>/REMOVEABLE</b>,
+<b>/BM</b> and <b>/PASSWORD password</b> you specified.
+Note, that does not mean that you specified all of the mentioned parameters, just
+that the ones you specified have been accepted.
+They will be used to run CD Boot/2 unattendedly</td>
+</tr>
+<tr>
+<td>CB20057E</td>
+<td>CD Boot/2 detected that you specified one or more of the commandline
+options <b>/MSG1 message</b>, <b>/MSG2 message</b> and/or <b>/MSG3 message</b>,
+however at least one of those options has an excessive length (e.g. <b>message</b>
+is longer than the allowed number of 79 characters).
+Please correct that option.</td>
+</tr>
+<tr>
+<td>CB20058E</td>
+<td>CD Boot/2 detected that you specified the commandline option <b>/PASSWORD 
+password</b>, however the option either has an excessive length (e.g. <b>password</b>
+is longer than the allowed number of 7 characters) or contains invalid 
+characters (e.g. one or more characters of <b>password</b> do not fall into the
+characterset <b>0...9</b>, <b>A...Z</b> and <b>a...z</b>).
+Please correct that option.</td>
+</tr>
+<tr>
+<td>CB20059E</td>
+<td>CD Boot/2 could get all information it needs to run unattendedly from the 
+options you supplied.
+</tr>
+<tr>
+<td>CB20070E</td>
+<td>CD Boot/2 needs to display a PM window, however an anchor block could not be created.
+Please report this problem</td>
+</tr>
+<tr>
+<td>CB20071E</td>
+<td>CD Boot/2 needs to display a PM window, however a message queue could not be created.
+Please report this problem</td>
+</tr>
+<tr>
+<td>CB20072E</td>
+<td>CD Boot/2 needs to display a PM window, however the CD Boot/2 dialog window could not be created.
+Please report this problem</td>
+</tr>
+<tr>
+<td>CB20073E</td>
+<td>CD Boot/2 failed to open the removeable drive (you specified for CD Boot/2 to modify),
+be sure that a medium is inserted into the drive.</td>
+</tr>
+<tr>
+<td>CB20074E</td>
+<td>CD Boot/2 failed to lock the removeable drive (you specified for CD Boot/2 to modify),
+be sure that this drive is not in use by another program like e.g. FDISK or LVM.
+If the problem still persists after a report, please report this problem</td>
+</tr>
+<tr>
+<td>CB20075E</td>
+<td>CD Boot/2 failed to read or write the boot sector of the removeable drive (you 
+specified for CD Boot/2 
+to modify), be sure that the medium is accessible (e.g. by running VMDISK against it).
+If the problem still persists after a report, please report this problem</td>
+</tr>
+<tr>
+<td>CB20076E</td>
+<td>CD Boot/2 failed to close the removeable drive (you specified for CD Boot/2 to modify),
+be sure that a medium is inserted into the drive.</td>
+</tr>
+<tr>
+<td>CB20077E</td>
+<td>CD Boot/2 failed either to read the file CD2BOOT from the directory CD Boot/2 was
+installed into, or failed to write the file CD2BOOT onto the removeable drive
+(you specified for CD Boot/2 to modify).
+For reading, be sure that CD Boot/2 is installed correctly, for writing, be sure
+that a medium is inserted into the drive.</td>
+</tr>
+<tr>
+<td>CB20078E</td>
+<td>CD Boot/2 detected that the contents of the file CD2BOOT in the directory CD Boot/2
+was installed into did not match the expectations but seem to be currupted.
+Please reinstall CD Boot/2 and retry,</td>
+</tr>
+<tr>
+<td>CB20079E</td>
+<td>CD Boot/2 detected that the boot sector of the removeable drive (you specified for
+CD Boot/2 to modify) does not look like a boot sector of a removeable FAT media.
+Be sure that you have inserted a OS/2 FAT formatted media containing the files required
+to be bootable (e.g. by running SYSINSTX d: against that drive)</td>
+</tr>
+</table>
+<font Face="Helv,Helvetica,Arial">
+<p>
+If you haven't installed CD Boot/2 correctly (which is just uncompressing the archive
+you downloaded), other error messages might complain about missing files.
+In that case I would recommend to reinstall CD Boot/2 and if the problem persists
+to contact me.
+<p>
+<h2>CD Boot/2 return codes</h2>
+<p>
+CD Boot/2, that is both <b>CDBOOT.EXE</b> and <b>CDBOOTPM.EXE</b>, returns the 
+following return codes to the calling program.
+<p>
+</font>
+<table BORDER=2 CELLSPACING=2 CELLPADDING=2 WIDTH="100%">
+<tr>
+<td WIDTH="15%"><center>Return code</center></td>
+<td WIDTH="85%"><center>Explanation</center></td>
+</tr>
+<tr>
+<td>0</td>
+<td>CD Boot/2 returns 0 for a successful completion.</td>
+</tr>
+<td>1</td>
+<td>CD Boot/2 returns 1, if the specified parameter of a commandline option is
+syntactically invalid.
+Please ensure to correct the commandline.</td>
+</tr>
+<td>2</td>
+<td>CD Boot/2 returns 2, if the specified parameter of a commandline option or
+entered interactively was syntactically correct but semantically invalid (e.g. 
+a drive letter of a drive that does not contain a removeable media).
+Please ensure that you specify a valid parameter.</td>
+</tr>
+</table>
+<font Face="Helv,Helvetica,Arial">
+<p>
+<h2>Commandline options</h2>
+<p>
+CD Boot/2 uses library code (UStartup.?pp) that allows reuse of the code 
+required to start up typical AVIO and PM C++ applications, resulting in 
+shorter development cycles.
+Thus there are 2 types of commandline options:
+<ol>
+<li>options that are handled by the library which means that you supply them
+    on the commandline but usually you neither will be able to select them
+    in the AVIO nor the PM version of CD Boot/2. These are the options <b>/?</b>,
+    <b>/Language ll</b> and <b>/Log [logfile]</b>,
+<li>options that are handled by CD Boot/2 itself (and ignored by the library code).
+These options may also be written line by line into a file named <b>cidfile</b>
+and CD Boot/2 may be requested to read options from that file in advance to
+the commandline (thus also with higher precedence) by using the option
+<b>/Cid cidfile</b>.
+</ol>
+<p>
+For the commandline options that are handled by CD Boot/2 itself the following
+symbols are used for the table below:
+<ol>
+<li><b>C</b> (commandline) for options that can only specified on the commandline 
+    and can't be reconfigured by running CD Boot/2,
+<li><b>D</b> (default) for options that can be specified on the commandline and will 
+    override the defaults CD Boot/2 would use while not asking the user at all
+    (usually used by the AVIO version <b>CDBOOT.EXE</b>, as it only prompt the user
+    for the most important options) ,
+<li><b>O</b> (override) for options that can be specified on the commandline, 
+    but can be changed while running CD Boot/2 
+    (usually used by the PM version <b>CDBOOTPM.EXE</b>, as that will just
+    override the predefined values used in the Configuration Dialog initially),
+<li><b>U</b> (unattended) for options that will prevent CD Boot/2 to prompt 
+    the user at all, that is they will cause to run CD Boot/2 unattendedly, 
+</ol>
+dependent if you run the AVIO version <b>CDBOOT.EXE</b> or the PM
+version <b>CDBOOTPM.EXE</b>.
+<p>
+CD Boot/2 supports the following commandline options, other options specified on the
+commandline will be simply ignored:
+<p>
+</font>
+<table BORDER=2 CELLSPACING=2 CELLPADDING=2 WIDTH="100%">
+<tr>
+<td WIDTH="20%"><center>Option</center></td>
+<td WIDTH="7%"><center>AVIO</center></td>
+<td WIDTH="7%"><center>PM</center></td>
+<td WIDTH="66%"><center>Feature</center></td>
+</tr>
+<tr>
+<td><b>/?<br>-?</b></td>
+<td><center>C</center></td>
+<td><center>C</center></td>
+<td>This option allows you to display the available commandline options of CD Boot/2.
+<b>This option is handled by the library code.</b>
+</tr>
+<tr>
+<td><b>/Language ll<br>-Language ll</b></td>
+<td><center>C</center></td>
+<td><center>C</center></td>
+<td>This option allows you to specify the language CD Boot/2 uses other than
+the default or the one saved into <b>CB2.INI</b> from the last invocation of CD Boot/2.
+CD Boot/2 is NLS (National Language Support) enabled and ships in 2 languages,
+that is English (<b>Us</b>) and German (<b>Gr</b>).
+<b>This option is handled by the library code.</b>
+For example, if you want to display all texts in English you would launch
+CD Boot/2 with the command:
+<p>
+<xmp>
+CDBoot /Language Us
+CDBootPM /Language Us
+</xmp>
+As all NLS texts are contained in a file <b>CB2xx.msg</b>, it only makes sense
+to specify a <b>ll</b> when a <b>CB2ll.msg</b> exists, otherwise you will receive
+lots of error messages in English.
+<p>
+CD Boot/2 tries to use the language of the country you specified in your <b>CONFIG.SYS</b>,
+for example, I usually run the US version of OS/2 with German country settings, so
+CD Boot/2 will use German messages initially (that is, as long as you haven't
+overwritten it with the <b>/Language</b> option and saved it into 
+the profile <b>CB2.INI</b> 
+(Note! Only when PM (Presentation Manager) is up and running, that profile will used,
+e.g. when booting to an OS/2 fullscreen via ALT+F1 the profile can not be accessed).
+<p>
+As I can only provide the two mentioned languages, it is up to volunteers to translate
+CD Boot/2 into additional languages, any donations for that are welcome
+(please contact me if you're ready to offer your help, thanks)!</td>
+</tr>
+<tr>
+<td><b>/Log [logfile]<br>-Log [logfile]</b></td>
+<td><center>C</center></td>
+<td><center>C</center></td>
+<td>This option allows you to specify a logfile where all messages are logged into.
+If you omit the optional parameter <b>logfile</b>, the file <b>CB2.LOG</b> will
+be written into the directory CD Boot/2 was started from, otherwise <b>logfile</b>
+should be a fullly qualified filename.
+<b>This option is handled by the library code.</b>
+<p>
+The logfile can be used to debug problems or to log messages when running CD Boot/2
+unattendedly.
+If the logfile can't be written, CD Boot/2 displays an error message but continues.
+</tr>
+<tr>
+<td><b>/Cid cidile]<br>-Cid cidfile</b></td>
+<td><center>C</center></td>
+<td><center>C</center></td>
+<td>This option allows you to specify a <b>cidfile</b>, where CD Boot/2 will look for
+parameters in addition (and with higher precedence) than those specified on
+the commandline.
+However, the parameters <b>/?</b>, <b>/Language ll</b> and <b>/Log [logfile]</b>
+will only be recognized when specified at the commandline!
+<p>
+The <b>cidfile</b> can be used to avoid typing parameters on CD Boot/2's commandline
+for repetitive invokations of CD Boot/2.
+Or you can use it to store different configurations into different <b>cidfile</b>s. 
+<p>
+CD Boot/2 processes the contents of a <b>cidfile</b> by looking for options, that is
+a line starting with the <b>/</b> or <b>-</b> character followed by a keyword and
+optional data.
+It will save and append each option found to the previous on, and after reading the 
+<b>cidfile</b> completely it will also append the options specified directly on the 
+commandline.
+Therefor, when looking for options then, the options in the <b>cidfile</b> will take 
+precedence over the options specified on the commandline and the first match of an 
+option will win! 
+<p>
+A <b>cidfile</b> should conform the syntax:
+<ul>
+<li>the options are written line by line, that is, a single line should only contain
+a single option
+<li>an option contains a keyword, that is a supported keyword starting with
+the <b>/</b> or <b>-</b> character, followed by optional data
+<li>a line not starting with the keyword of a known option is treated as comment
+and will be ignored
+<li>You need to enclose the optional data between <b>"</b> in case the data contains
+the <b>/</b> or <b>-</b> characters, otherwise it is optional
+<li>the size of the file is restricted to less than 8kB
+</ul>
+e.g. it may look like:
+<p>
+<xmp>
+#
+# To request CD Boot/2 to read the options (commandline parameters)
+# from this file, just run: CDBoot/CDBootPM /Cid Sample.cid
+#
+/MSG1 "Welcome to the bootable installation CD-ROM for EasyRestore"
+/MSG3 Copyright (C) Interactive Magic, 2002
+; Additional parameters
+/Harddisk
+/Clear
+/BM
+/Password Aurora
+</xmp>
+</tr>
+<tr>
+<td><b>/Drive d<br>-Drive d<br><hr>/Timeout tt<br>-Timeout tt</b></td>
+<td><center>U</center></td>
+<td><center>U</center></td>
+<td>The option <b>/Drive d</b> allows you to specify the drive letter you want 
+CD Boot/2 to modify the boot process.
+Only the letters <b>A to Z</b> (or <b>a to z</b>) are valid for <b>d</b>.
+<p>
+The option <b>/Timeout tt</b> allows you to specify the Timeout Period you want 
+CD Boot/2 to use in the modified boot process.
+Only one or two numeric characters together being in the range of <b>1 to 60</b> are 
+valid for <b>tt</b>. 
+<p>
+These options are only valid if specified simultaneously, as both are required 
+to run CD Boot/2 unattendedly.
+</tr>
+<tr>
+<td><b>/HARDDISK<br>-HARDDISK<br><hr>/REMOVEABLE<br>-REMOVEABLE</b></td>
+<td><center>D</center></td>
+<td><center>O</center></td>
+<td>These options allow you to specify from where CD Boot/2 will boot by default,
+that is from which media CD Boot/2 will continue boot if the Timeout Period
+expires.
+As both options are conflicting, you may only specify one of them or none at all
+which causes CD Boot/2 to default to option <b>/HARDDISK</b>.
+<p>
+Usually you would leave the default option <b>/HARDDISK</b>, that is CD Boot/2
+will continue booting from the first Harddisk after the Timeout Period expires,
+because that allows you to leave the media inserted in the drive without any need
+to care about it for normal boots (e.g. useful when the CD-ROM is just used for
+one-time installations).
+<p>
+However, if you intend to use the removeable media only when you really want to
+boot from it (e.g. for a diagnostics CD-ROM), you may select the option 
+<b>/REMOVEABLE</b> instead, so that CD Boot/2 continues to boot from the removeable
+media when the Timeout Period expires.
+</tr>
+<tr>
+<td><b>/CLEAR<br>-CLEAR</b></td>
+<td><center>D</center></td>
+<td><center>O</center></td>
+<td>This option allows you to specify that CD Boot/2 will clear the screen before
+it displays its menu (thus removing any messages BIOS may have left) and also
+immediately before booting from the selected media (thus removing the messages
+displayed by CD Boot/2 itself).
+<p>
+</tr>
+<tr>
+<td><b>/BM<br>-BM</b></td>
+<td><center>D</center></td>
+<td><center>O</center></td>
+<td>This option allows you to specify that CD Boot/2 will decide what to boot
+depending if an active OS/2 Bootmanager partition is found or not.
+<p>
+If no active OS/2 Bootmanager partitions is found, CD Boot/2 will display
+the menu allowing the user to expire the timeout to boot the default media 
+(configured with the <b>/HARDDISK</b> or <b>/REMOVEABLE</b> options) or 
+override the default selection.
+<p>
+If an active OS/2 Bootmanager partition is found, CD Boot/2 will also
+display the menu allowing the user to select between the removeable media 
+or first harddisk within the timeout, but defaults to boot from the Harddisk 
+regardless of what has been configured with the <b>/HARDDISK</b> or 
+<b>/REMOVEABLE</b> options.
+Of course, the user can overrule that within the timeout period.
+<p>
+This option is useful to allow completely unattended installations.
+You would use the options <b>/REMOVEABLE</b> and <b>/BM</b> to advice
+CD Boot/2 to default booting from an removeable OS/2 installation media
+as long as installation is not finished by setting the OS/2 Bootmanager
+partition active on the first harddisk.
+<br>
+<b>Note</b>: This method of OS/2 installation does fit best, if you have a 
+multiphase installer (in the sense that it can handle the required reboots, e.g.
+after partitioning, ... automatically) on e.g. CD-ROM that installs 
+OS/2 not using the OS/2 installer directly, but copying OS/2 e.g. out of 
+a ZIP files or drive image (in other words, if you install by "cloning"
+an existing installation archived in some way).
+</tr>
+<tr>
+<td><b>/Cpy1 message<br>-Cpy1 message<br>/Cpy2 message<br>
+-Cpy2 message<br>/Cpy3 message<br>-Cpy3 message<br></b></td>
+<td><center>D</center></td>
+<td><center>O</center></td>
+<td>This option allows you to optionally specify up to 3 Copyright messages that will 
+be displayed in the boot menu of CD Boot/2 when booting from the removeable media.
+<p>
+Each message can be up to 79 characters in size (otherwise it will be ignored), and 
+you can specify any combination of them, however CD Boot/2's menu will display them
+sequentially without representing empty messages by empty lines.
+You could however specify an empty line by e.g. <b>/CPY2 " "</b>, that is
+not an empty line but a line containing a single space.
+<p>
+<b>Note! This option will be ignored until you also supply an undocumented addtional
+option which I'm prepared to tell you, if you 
+<a href="mailto:Roman_Stangl@at.ibm.com">e-mail</a> me your need.
+</tr>
+<tr>
+<td><b>/CpyColor c<br>
+-CpyColor c</b></td>
+<td><center>D</center></td>
+<td><center>O</center></td>
+<td>This option allows you to specify the color <b>c</b> that <b>CD2BOOT</b> will use 
+to display the Copyright messages.
+<p>
+The color <b>c</b> is specified in the range from 0 to 15 and correspond to the
+colors 0 to 15 BIOS uses when displaying characters.
+Invalid numbers specified do not result in an error but that a random color will 
+be taken instead.  
+</tr>
+<tr>
+<td><b>/Msg1 message<br>-Msg1 message<br>/Msg2 message<br>
+-Msg2 message<br>/Msg3 message<br>-Msg3 message<br></b></td>
+<td><center>D</center></td>
+<td><center>O</center></td>
+<td>This option allows you to optionally specify up to 3 Userdefined messages that will be
+displayed in the boot menu of CD Boot/2 when booting from the removeable media.
+<p>
+Each message can be up to 79 characters in size (otherwise you'll get an eror message), 
+and you can specify any combination of them, however CD Boot/2's menu will display them 
+sequentially without representing empty messages by empty lines.
+You could however specify an empty line by e.g. <b>/MSG2 " "</b>, that is
+not an empty line but a line containing a single space.
+</tr>
+<tr>
+<td><b>/MsgColor m<br>
+-MsgColor m</b></td>
+<td><center>D</center></td>
+<td><center>O</center></td>
+<td>This option allows you to specify the color <b>m</b> that <b>CD2BOOT</b> will use 
+to display the Userdefined messages.
+<p>
+The color <b>m</b> is specified in the range from 0 to 15 and correspond to the
+colors 0 to 15 BIOS uses when displaying characters.
+Invalid numbers specified do not result in an error but that a random color will 
+be taken instead.  
+</tr>
+<tr>
+<td><b>/Password password<br>-Password password</b></td>
+<td><center>D</center></td>
+<td><center>O</center></td>
+<td>This option allows you to optionally specify a password that has to be
+entered correctly in order for CD Boot/2 to boot from the removeable media.
+You can select to boot from the first harddisk without having to enter that
+password (as you could boot from the first harddisk by removing the removeable
+media anyway).
+<p>
+The <b>password is case sensitive and can be up to 7 characters in size</b>, where each
+character must be in the range of 0...9, A...Z and a...z.
+Please note that the password is not completely secure, but nevertheless certainly
+not trivial as it will be encrypted.
+</tr>
+</table>
+<font Face="Helv,Helvetica,Arial">
+<p>
+With that in mind, the following commandline is an example for running CD Boot/2
+unattendedly while you still can set the options according to your preferences:
+<b>cdboot[pm] /removeable  /password OS2 /clear /msg1 "Welcome to the bootable ..." 
+/msg3 "Copyright (C) ..." /msg2 "For new installations ..." /MsgColor 11 /drive p 
+/timeout 15 /log</b>
+<p>
+<h2>What's new</h2>
+<p>
+Changes between Version 2.00 and 1.60.
+<p>
+<ul>
+<li>Changed version from 1.60 to 2.00 as 1.60 was a private fix never intended for
+public release.
+</ul>
+<p>
+Changes between Version 1.60 and 1.50.
+<p>
+Special thanks to Rainer Feuerstein from IBM Enterprise Warp & WorkSpace Services
+in Germany for his constructive critics and suggestions and really intensive
+testing and usage.
+This CD Boot/2 version wouldn't have been enhanced to its current state without 
+his motivation!
+<p>
+<ul>
+<li>Fixed that CD Boot/2 will behave incorrectly, fail or even hang if <b>CD2BOOT</b>
+is fragmented.
+<b>CD2BOOT</b> will now check if it has been written (by <b>CDBOOT.EXE/CDBOOTPM.EXE</b>) 
+and loaded (by the boot sector) correctly.
+If that check fails, it will display <font color="green"><b>CD2BOOT is fragmented - 
+System stopped! Press ALT+CTRL+DEL to reboot!</b></font>.
+<li>Fixed that CD Boot/2 will fallback to the default logfile name <b>CB2.Log</b>
+if a logfile was requested with the option <b>/LOG</b>.
+This was intended ever, but if instead a filename another option was specified,
+CD Boot/2 incorrectly did handle that option as the logfile name. 
+<li>Added the options <b>/Cpycolor c</b> and <b>/MsgColor m</b> to allow a
+customization of the colors used for the Copyright and Userdefined messages.
+<li>Added that CD Boot/2's <b>CD2BOOT</b> will display its messages in color
+instead of White on Black.
+The default color used it Light White on Blue.
+<br>
+This assumes that BIOS will setup a color screen mode and I have no doubt that this
+is a standard behaviour, however even if BIOS puts the screen into a monochrome mode
+this should not hurt (other that no colors will show up then). 
+<li>Added to the documentation that CD Boot/2's <b>CD2BOOT</b> will not work if
+it is fragmented.
+<font color="red">I thus strongly recommend to run a defragmentation program
+against the bootable OS/2 diskette after CD Boot/2 has been run against it!</font>
+<li>Added the <b>/BM</b> option to force CD Boot/2 to look for an active 
+OS/2 BootManager partition on the first Harddisk.
+If no active OS/2 Bootmanager partition is found, CD Boot/2 continues to boot
+from the first Harddisk or removeable media depending on the preselection
+or the user's selection.
+If an active OS/2 Bootmanager partition is found, CD Boot/2 will ignore the
+user's preferences which media to boot from, but default to a Harddisk boot.
+<li>Added the <b>/CID cidfile</b> option to allow CD Boot/2 to read commandline
+parameters from a file in addition to the commandline passed.
+The parameters specified in the <b>cidfile</b> take precedence over the parameters
+specified directly onto the commandline.
+<li>Added the <b>/Cpy1</b>, <b>/Cpy2</b> and <b>/Cpy3</b> options to allow you
+the customization of the Copyright messages (that is to replace the author's
+copyright messages).
+Note! These options will be ignored until you additionally supply an additional
+option which I'm prepared to tell you if you e-mail me your need. 
+<li>Changed the online help and documentation to more accurately tell which
+options will be evaluated in which sequence.
+<li>Changed that the password for the removeable media will not be shown in
+clear text when booting from the CD-ROM.
+<li>Changed that CD Boot/2's GUI version CDBOOTPM will terminate automatically 
+if enough commandline options were specified the run it unattendedly and no 
+error happened during execution.
+</ul>
+<p>
+Changes between Version 1.50 and 1.40.
+<ul>
+<li>Fixed minor layout bugs (e.g. cursor and text positions) in <b>CD2BOOT</b>.
+<li>Fixed minor coding inefficiencies and ambiguities in <b>CD2BOOT</b> source code.
+<li>Added a menu to allow a selection from all possible options before the 
+selection timer times out, instead of having to wait for a Timeout Period to
+expire from booting from the first harddisk.
+<li>Added a short delay after the information from which media the boot process
+will continue was displayed, allowing the user to verify what has been selected.
+<li>Added parameters to allow to define up to 3 user defineable textlines with 
+the PM version <b>CDBOOTPM.EXE</b>, which will be displayed after the 
+CD Boot/2 copyright during boot of the <b>CD2BOOT</b> code.
+<li>Added a parameter to allow to specify a password which is needed to 
+continue booting from the removeable media.
+You can still request CD Boot/2's menu to boot from the harddisk without
+needing to enter the password (as you could do the same by removing the
+removeable media).
+<li>Added an option to specify which media, the first Harddisk or the removeable
+media, should be booted as the default media when no selection is made before
+the timer expires.
+<li>Added an option to specify that CD Boot/2 clears the screen (which may be
+left over from BIOS) before it displays boot menu and to clear the screen
+immediately before the selected media get booted (to remove the message left
+over from CD Boot/2).
+<li>Changed that the CD Boot/2 documentation is split into 2 parts, one giving
+some tips on creating bootable CD-ROMs using CD Boot/2 and one about operating
+CD Boot/2 itself.
+<li>Changed that the :hp2.Enter:eh2p.-Key continues booting from the default
+media, while the :hp2.Spacebar:ehp2.-Key will boot from the non-default media.
+Depending on which media is the default, e.g. the :hp2.Enter:ehp2.-Key may
+sometime continue to boot from the first harddisk or from the removeable media.
+</ul>
+<p>
+Changes between Version 1.40 and 1.30.
+<ul>
+<li>CD Boot/2 now also allows you to modify a FAT-based removeable media bootsector
+not written by OS/2 (e.g. from DOS).
+However there are some limitations, it likely will work, but there is no guarantee!
+<br>
+This has been successfully tested with the PC DOS 2000 installation diskette,
+a WIN95 installation diskette, and a W2K installation diskette. 
+</ul>
+<p>
+Changes between Version 1.30 and 1.20.
+<ul>
+<li>Fixed that CD Boot/2 can use the profile <b>CB2.INI</b> (and thus using the
+Prf* APIs) when running in an AVIO session as long as PM is running.
+Thanks to Holger Veit for documenting the API to detect PM is running.
+If PM is not running, e.g. when having booted to an OS/2 fullscreen via ALT+F1,
+<b>CB2.INI</b> still can't be used.
+<li>Fixed that CD Boot/2's PM version <b>CDBOOTPM.EXE</b> did not show all
+messages in the logo window.
+<li>Fixed that CD Boot/2 did not unlock the drive requested to be modified
+if an error occurred unless it was terminated.
+<li>Added the <b>/LOG [logfile]</b> option to log all messages into a logfile.
+<li>Added that the <b>CDBOOTPM</b> logo window status text will change from a 
+textline to a multiline entryfield when CD Boot/2 is ready to terminate to allow 
+you to scroll through all messages that occurred.
+</ul>
+<p>
+Changes between Version 1.20 and 1.10.
+<ul>
+<li>Fixed that logo window showed incorrect release information and Close button did
+    partly cover text.
+<li>Fixed that Close button did steal the input focus from message boxes.
+<li>Added support for a CID (Configuration, Installation, Distribution) environment
+    to allow running CD Boot/2 in batch by using the commandline options <b>/DRIVE</b> and
+    <b>/TIMEOUT</b>.
+<li>Added that CD Boot/2 will display its syntax when invoked with the commandline
+    option <b>/?</b>.
+<li>Added that CD Boot/2 will pass back a return code to the caller (so that it can
+    be used in batch or unattendedly).
+<li>Added that the PM version of CD Boot/2 <b>CDBOOTPM.EXE</b> will replace the single
+    message line with a listbox containing all messages when execution has finished
+    and just waits for the user to close the application.
+<li>Changed that the AVIO version <b>CDBOOT.EXE</b> now does not use the profile 
+    <b>CB2.INI</b> (as using the Prf* APIs will require PM to be running).
+    The disadvantage is that CD Boot/2 will no longer remember the language it ran last
+    time, however the big advantage is that you can run CD Boot/2 even from the OS/2
+    fullscreen you can get by pressing ALT+F1 and then F2 while booting.
+<li>Changed documentation to be more helpful.
+</ul>
+<p>
+Changes between Version 1.10 and 1.00.
+<ul>
+<li>Fixed CDBoot2.html to correctly explain how to modify a bootable OS/2 installation
+CD-ROM (and successfully used it to install Aurora Convenience Pack on a IBM PC 300PL).
+</ul>
+<p>
+Version 1.00 was the first publicly available version.
+<p>
+<h2>CD Boot/2 download</h2>
+You are welcome to download 
+<a href="http://www.geocities.com/SiliconValley/Pines/7885/Download/CDBoot2v200.zip">CD Boot/2 V2.00</a>
+(inclusive its source written with MASM 6.0 and VisualAge C++) from this site.
+<p>
+<h2>Building CD Boot/2 from its sources</h2>
+<p>
+You would need:
+<ol>
+<li>Microsoft Macro Assembler 6.0 (or compatible)
+<li>IBM VisualAge C++ V3 (or compatible)
+<li>IBM Warp Toolkit V4.5 (or compatible)
+</ol>
+Then just switch into the <b>\SOURCE</b> directory and run <b>NMAKE</b> for detailed
+instructions.
+Note, in contrast to what you will be able to do during the build process, I did run a utility 
+to strip the debug infromation from the executables, so the executables you build will be
+larger than the ones I have shipped!
+<p>
+As the archive <b>SOURCE.ZIE</b> containing the source is encrypted, you need to run the
+command <b>PROTECT cdboot2v200 Source.zie</b> to get <b>SOURCE.ZIP</b> which you can then
+unzip as usual.
+(In case you wonder, that way anyone interested in the source needs to have installed OS/2
+as I make the decryption program available for OS/2 but certainly not for Windows ;-).
+<p>
+<hr size=5>
+(C) <a href="mailto:Roman_Stangl@at.ibm.com">Roman Stangl</a> (Roman_Stangl@at.ibm.com), 11.06.2001
+<br>
+Last update: 22.05.2002
+</body>
+</html>
+

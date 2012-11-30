@@ -1,0 +1,39 @@
+                          Upload Information Template for Hobbes.nmsu.edu
+                          ===============================================
+
+        Archive Filename: CDBoot2v200.zip
+       Short Description: Create a single bootable OS/2 installation CD-ROM
+        Long Description: CD Boot/2 is a utility to enhance bootable OS/2 CD-
+                          ROMs so that when the CD-ROM is inserted into the
+                          drive, a menu is displayed immediately after BIOS
+                          has started booting from it. From that menu, the user
+                          has to press the spacebar to continue booting from 
+                          the removeable media, or if the customizeable period
+                          expires, the boot process continues booting from the
+                          first harddisk instead. That avoids having to
+                          shuffle the 2 CD-ROMs as required by IBM's approach.
+                          CD Boot/2 can be used to modify any FAT-based (OS/2,
+                          DOS, WIN9x, WIN NT) bootable diskette to display 
+                          that menu.
+                          Source is included (req. MASM 6.0, IBM VisualAge 
+                          C++ V3, Warp Toolkit or compatible).
+
+      Proposed directory
+           for placement: /pub/os2/apps/mmedia/cd/cd-r
+
+               Your name: Roman Stangl
+           Email address: Roman_Stangl@at.ibm.com
+    Program contact name: (same)
+   Program contact email: (same)
+             Program URL: http://www.geocities.com/SiliconValley/Pines/7885/
+
+      Would you like the
+   contact email address
+    included in listings? yes
+
+Operating System/Version: Aurora, MCP, ACP 
+ Additional requirements: 
+
+                Replaces: /pub/os2/apps/mmedia/cd/cd-r/CDBoot2v150.zip
+
+

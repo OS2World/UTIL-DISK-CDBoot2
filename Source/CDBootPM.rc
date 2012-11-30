@@ -1,0 +1,10 @@
+#include    <os2.h>
+#define     __PM__
+#include    "UStartup.hpp"
+#include    "CB2.h"
+
+ICON        ID_MAINWINDOW       PRELOAD     CDBootPM.ico
+
+BITMAP      ID_LOGOGRAPHICS     LOADONCALL  CDBootPM.bmp
+
+rcinclude   CB2Dlg.dlg

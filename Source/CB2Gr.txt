@@ -1,0 +1,256 @@
+;**********************************************************************
+;                               CDBoot/2
+;               Copyright (C) by Stangl Roman, 2000, 2002
+; This Code may be freely distributed, provided the Copyright isn't
+; removed, under the conditions indicated in the documentation.
+;
+; CB2xx.txt    NLS messages file, to support another language create
+;              a copy of this file containing translated messages and
+;              replace xx (for example) by:
+;                  Us ... for US English
+;                  Gr ... for German
+;                  Fr ... for French
+;              And then run the application with the commandline option
+;              -Language Gr (for German,...). Don't forget that
+;              CB2xx.rc also needs to be translated.
+;
+;**********************************************************************
+;
+; Messages 0001 to 0100 are reserved for the UStartup tartup code and
+; must not be changed for all applications using UStartup
+;
+CB2
+CB20000I: I CB2Gr.msg
+CB20001E: E Can't load message %1 from messagefile %2. Please report this problem to the author.
+CB20002I: I Can't load message from NLS (National Language Support) message file, trying US English version.
+CB20003E: E Can't load message from NLS (National Language Support) and from US English message files. CD Boot/2 can't continue, press "Close" to exit.
+CB20004E: E Fehler SYS%1 beim Schreiben der Logdatei %2. CD Boot/2 schreibt keine Logdatei.
+CB20005I: I DLL AusfÅhrung fehlgeschlagen! CD Boot/2 kann nicht fortfahren, drÅcken Sie den "%1" Druckknopf.
+CB20006I: I DrÅcken Sie den "%1" Druckknopf um CD Boot/2 zu beenden.
+CB20007I: X                                 CD Boot/2 V2.00
+CB20008I: X              (C) Roman Stangl (Roman_Stangl@at.ibm.com)  05, 2002
+CB20009I: X               http://www.geocities.com/SiliconValley/Pines/7885/
+CB20010I: X Beenden
+CB20011I: I Initialisiere CD Boot/2 Environment ...
+CB20012I: I Lade CD Boot/2 Meldungen ...
+CB20013I: I CD Boot/2 LÑuft unter dem %1 Environment ...
+CB20014I: I Lade CD Boot/2 Module ...
+CB20015I: I Lade CD Boot/2 Resourcen DLL ...
+CB20016I: I Fehler beim Laden der CD Boot/2 Meldungen Datei "%1". Meldungen werden mîglicherweise in Englisch angezeigt!
+CB20017I: I Fehler SYS%1 beim Laden der CD Boot/2 Resourcen DLL "%2", Modul "%3" trug zum Fehler bei. CD Boot/2 beendet.
+Probieren Sie bitte CD Boot/2 mit einer unterstÅtzten Sprache (z.B. Englisch mit "/Language Us") als Parameter zu starten.
+Resourcen werden daher Englisch geladen! CD Boot/2 beendet wenn das auch nicht funktioniert.
+CB20018E: E Falsche Version der CD Boot/2 Resourcen DLL "%1", benutzen Sie OS/2's BLDLEVEL Befehl um die Versionen von Modulen anzuzeigen. CD Boot/2 beendet.
+CB20019I: I Lade CD Boot/2 Compiler DLL %1 ...
+CB20020E: E Fehler SYS%1 beim Laden der CD Boot/2 Compiler DLL "%2", Modul "%3" trug zum Fehler bei.
+Bitte ÅberprÅfen Sie ob diese DLL korrekt installiert ist! CD Boot/2 beendet.
+CB20021I: I Lade CD Boot/2 Code DLL ...
+CB20022E: E Fehler SYS%1 beim Laden der CD Boot/2 Code DLL "%2", Modul "%3" trug zum Fehler bei.
+Bitte ÅberprÅfen Sie die Aufrufumgebung ob diese DLL korrekt installiert ist! CD Boot/2 beendet.
+CB20023E: E Falsche Version der CD Boot/2 Code DLL "%1", benutzen Sie OS/2's BLDLEVEL Befehl um die Versionen von Modulen anzuzeigen. CD Boot/2 beendet.
+CB20024E: E Fehler SYS%1 beim Laden der Einsprungaddresse def CD Boot/2 Code DLL "%2". CD Boot/2 beendet.
+CB20025E: E Fehler beim Starten des Threads der die CD Boot/2 Code DLL "%1" ausfÅhrt. CD Boot/2 beendet.
+CB20026I:
+CB20027I:
+CB20028I:
+CB20029I:
+CB20030I:
+CB20031I:
+CB20032I:
+CB20033I:
+CB20034I:
+CB20035I:
+CB20036I:
+CB20037I:
+CB20038I:
+CB20039I:
+CB20040I:
+CB20041I:
+CB20042I:
+CB20043I:
+CB20044I:
+CB20045I:
+CB20046I:
+CB20047I:
+CB20048I:
+CB20049I:
+;
+; Messages 0050 to 0060 are application specific used in UStartup and user code
+;
+CB20050I: I Syntax: CDBOOT/CDBOOTPM [/?] [/LANGUAGE ll] [/LOG [logdatei]]
+          [/CID ciddatei] [/DRIVE d /TIMEOUT tt] [/CPYCOLOR c]
+          [/MSG1 text] [/MSG2 text] [/MSG3 text] [/MSGCOLOR m]
+          [/HARDDISK | /REMOVEABLE] [/CLEAR] [/BM] [/PASSWORD kennwort] 
+          Wobei:
+                  ?  ........ Zeigt diese Hilfe
+                  ll ........ Sprache die verwendet werden soll (CB2ll.msg ist
+                              dazu erforderlich sonst wird Englisch verwendet)
+                  logdatei... Optionale Logdatei (Standard: CB2.LOG)
+                  ciddatei .. Datei aus der Parameter gelesen werden
+                  d  ........ BootfÑhiges Wechselmedium wo CD Boot/2
+                              installiert werden soll (A, B, ... ,Z)
+                  tt ........ Periode nach der CD Boot/2 weiter von der ersten
+                              Festplatte bootet (1...60)
+                  c ......... Farbe der Copyright Nachricht (0...15)
+                  text ...... Benutzerdefinierte Nachricht die durch CD Boot/2
+                              angezeigt wird (max. 79 Zeichen)
+                  m ......... Farbe der Benutzerdefinierten Nachricht (0...15)
+                  kennwort .. Kennwort um vom Wechselmedium zu booten (max. 7 
+                              Zeichen, 0...9, A...Z, a...z)
+          RÅckgabewerte:
+                  0  ........ Erfolgreiche DurchfÅhrung
+                  1  ........ Warnung, ungÅltiger Parameter
+                  2  ........ Fatal, interner Verarbeitungsfehler
+CB20051I: I Syntax: CDBOOT/CDBOOTPM [/?] [/LANGUAGE ll] [/LOG [logdatei]] [/CID cidfile] [/DRIVE d /TIMEOUT tt] [/CPYCOLOR c] [/MSG1 text] [/MSG2 text] [/MSG3 text] [/MSGCOLOR m] [/PASSWORD kennwort]
+          Wobei:
+                  ?  ........ Zeigt diese Hilfe
+                  ll ........ Sprache die verwendet werden soll (CB2ll.msg ist dazu erforderlich sonst wird Englisch verwendet)
+                  logdatei .. Optionale Logdatei (Standard: CB2.LOG)
+                  ciddatei .. Datei aus der Parameter gelesen werden
+                  d  ........ BootfÑhiges Wechselmedium wo CD Boot/2 installiert werden soll (A, B, ..., Z)
+                  tt ........ Periode nach der CD Boot/2 weiter von der ersten Festplatte bootet (1...60)
+                  c ......... Farbe der Copyright Nachricht (0...15)
+                  text ...... Benutzerdefinierte Nachricht die durch CD Boot/2 angezeigt wird (max. 79 Zeichen)
+                  m ......... Farbe der Copyright Nachricht (0...15)
+                  kennwort .. Kennwort um vom Wechselmedium zu booten (max. 7 Zeichen, 0...9, A...Z, a...z)
+          RÅckgabewerte:
+                  0  ........ Kein Fehler, Erfolgreiche DurchfÅhrung
+                  1  ........ Warnung, ungÅltiger Parameter angegeben
+                  2  ........ Fataler Verarbeitungsfehler
+CB20052E: E Optionaler Parameter "/DRIVE d" (wobei d ein Wechselmedium ist, wie z.B. A) unvollstÑndig oder ungÅltig! CD Boot/2 beendet.
+CB20053E: E Optionaler Parameter "/TIMEOUT tt" (wobei tt die Periode von 1 bis 60 Sekunden ist) unvollstÑndig oder ungÅltig! CD Boot/2 beendet.
+CB20054E: E Optionale Parameter "/DRIVE d" und "/TIMEOUT tt" mÅssen zusammen angegeben werden! CD Boot/2 beendet.
+CB20055E: E Optionale Parameter "/HARDDISK" und "/REMOVEABLE" dÅrfen nicht zusammen angegeben werden! CD Boot/2 beendet.
+CB20056I: I UnterstÅtzte Befehlszeilenparameter sind gÅltig und werden verwendet.
+CB20057E: E Optionaler Parameter "/MSG? text" ist zu lange (>79 Zeichen) fÅr "text"! CD Boot/2 beendet.
+CB20058E: E Optionaler Parameter "/PASSWORD kennwort" ist zu lange (>7 Zeichen) oder enthÑlt ungÅltige Zeichen (d.h. nicht 0...9, A...Z, a...z). CD Boot/2 beendet.
+CB20059I: I Angegebene Parameter ausreichend, CD Boot/2 lÑuft ohne Benutzerinverventionen.
+CB20060I: 
+CB20061I: 
+CB20062I: 
+CB20063I: 
+CB20064I: 
+;
+; Messages 0065 and above are available for user messages in user code
+;
+CB20065I: 
+CB20066I: 
+CB20067I: 
+CB20068I: 
+CB20069I: 
+CB20070E: E Erzeugung des Anchor Blocks schlug mit Fehler 0x%1 fehl. CD Boot/2 beendet.
+CB20071E: E Erzeugung der Message Queue schlug mit Fehler 0x%1 fehl. CD Boot/2 beendet.
+CB20072E: E Erzeugung des Dialog Fensters schlug mit Fehler 0x%1 fehl. CD Boot/2 beendet.
+CB20073E: E ôffnen des ausgewÑhlten Wechselmediums schlug mit Fehler SYS%1 fehl. CD Boot/2 beendet.
+CB20074E: E Sperren des ausgewÑhlten Wechselmediums schlug mit Fehler SYS%1 fehl. CD Boot/2 beendet.
+CB20075E: E Lesen/Schreiben des Bootsektors schlug mit Fehler SYS%1 fehl. CD Boot/2 beendet.
+CB20076E: E Schliessen des ausgewÑhlten Wechselmediums schlug mit Fehler SYS%1 fehl. CD Boot/2 beendet.
+CB20077E: E Lesen/Schreiben von CD2BOOT schlug fehl. CD Boot/2 beendet.
+CB20078E: E Der Inhalt von CD2BOOT ist ungÅltig, probieren Sie eine Neuinstallation. CD Boot/2 beendet.
+CB20079E: E UngÅltiger Bootsektor, Referenz auf "OS2BOOT" fehlt. Bitte stellen Sie sicher dass Sie den Bootsektor eines Wechselmediums auswÑhlen. CD Boot/2 beendet.
+CB20080I: I Die Laufwerke %1 unterstÅtzen vermutlich Wechselmedien auf denen der CD Boot/2 Boot Lader installiert werden kann.
+CB20081I: Q Auf welches Wechsellaufwerk wollen Sie CD Boot/2 installieren?
+CB20082I: I CD Boot/2 erlaubt es eine Periode von %1 bis %2 Sekunden zu definieren in der sie durch die Tasten 1 oder 2 von einem anderem als dem Standardmedium booten kînnen.
+CB20083I: Q Wieviele Sekunden wollen Sie CD Boot/2 warten lassen?
+CB20084I: I Lese den Bootsektor vom Wechselmedium %1.
+CB20085I: I Lese den CD2BOOT Kode aus Datei %1.
+CB20086W: W Der Bootsektor vom Wechselmedium %1 wurde schon durch einen Lauf von CD Boot/2 modifiziert! CD Boot/2 wird dies berÅcksichtigen.
+CB20087I: I Der Bootsektor vom Wechselmedium scheint ein FAT-basierender nicht-OS/2 Bootsektor (z.B. von DOS) zu sein. Wahrscheinlich ist er dennoch kompatibel mit CD Boot/2.
+CB20088W: W Der Bootsektor vom Wechselmedium scheint OS/2 oder FAT-basierender Bootsektor zu sein. Wahrscheinlich ist er inkompatibel mit CD Boot/2!
+CB20089I: I Schreibe den CD2BOOT Kode in Datei %1. 
+CB20090I: I Modifiziere den Bootsektor vom Wechselmedium um CD2BOOT statt OS2BOOT zu laden.
+CB20091I: I Schreibe den modifizierten Bootsektor auf Wechselmedium %1.
+CB20092I: X CD2BOOT - CD Boot/2 V2.00
+CB20093I: 
+CB20094I: 
+CB20095I: 
+CB20096I: 
+CB20097I: 
+CB20098I: I CD Boot/2 wird initialisiert ...
+CB20099I: I Warten auf Ende der Verarbeitung von CD Boot/2 ...
+CB20100I: X CD2BOOT - CD Boot/2 V2.00
+CB20101I: X Copyright (C) Roman Stangl (Roman_Stangl@at.ibm.com) 05, 2002
+CB20102I: X           http://www.geocities.com/SiliconValley/Pines/7885/
+CB20103I: X Bitte wÑhlen Sie das Medium ( ist Standardmedium) von dem Sie booten wollen:
+CB20104I: X   1 ... Von der ersten Festplatte
+CB20105I: X   2 ... Vom Wechselmedium
+CB20106I: X Bitte innerhalb %d Sekunden wÑhlen, sonst wird Standardmedium gebootet!
+CB20107I: X Boote weiter vom Wechselmedium ...
+CB20108I: X Boote weiter von der ersten Festplatte ...
+CB20109I: X CD2Boot SYS02025: Lesefehler bei der Partitionstabelle der ersten Festplatte!
+CB20110I: X CD2Boot SYS02027: Systemdiskette einsetzen und das System neu starten!
+CB20111I: X Bitte Kennwort eingeben um vom Wechselmedium zu booten: 
+CB20112I: X UngÅltiges Kennwort, neu eingeben oder mit ALT+CTRL+DEL rebooten: 
+CB20113I: X Partitionstabelle enthÑlt keine aktive OS/2 Bootmanager Partition.
+CB20114I: X Partitionstabelle enthÑlt eine aktive OS/2 Bootmanager Partition.
+CB20115I: X CD2BOOT ist defekt o. fragmentiert - System gestoppt! Mit ALT+CTRL+DEL rebooten!
+CB20116I:
+CB20117I:
+CB20118I:
+CB20119I:
+CB20120I:
+CB20121I:
+CB20122I:
+CB20123I:
+CB20124I:
+CB20125I:
+CB20126I:
+CB20127I:
+CB20128I:
+CB20129I:
+CB20130I:
+CB20131I:
+CB20132I:
+CB20133I:
+CB20134I:
+CB20135I:
+CB20136I:
+CB20137I:
+CB20138I:
+CB20139I:
+CB20140I:
+CB20141I:
+CB20142I:
+CB20143I:
+CB20144I:
+CB20145I:
+CB20146I:
+CB20147I:
+CB20148I:
+CB20149I:
+CB20150I: X CD Boot/2 Boot Lader "CD2BOOT" Einstellungen:
+CB20151I: X Installation:
+CB20152I: X Installieren auf Laufwerk:
+CB20153I: X Pfad von CD2BOOT Kode:
+CB20154I: X Verzîgerung [Sekunden]:
+CB20155I: X Standard ist ~Festplatten Boot
+CB20156I: X Standard ist ~Wechselmedium Boot
+CB20157I: X ~BIOS Schirm lîschen
+CB20158I: X Optionaler Kennwortschutz:
+CB20159I: X ~Aktivieren
+CB20160I: X Erweitertes Harddisk Boot
+CB20161I: X Akti~vieren      
+CB20162I: X Copyright Nachrichten:
+CB20163I: X Optionale Benutzerdefinierte Nachrichten:
+CB20164I: X ~Installieren
+CB20165I: X ~Beenden
+CB20166I: X Farbe
+CB20167I: X Schwarz
+CB20168I: X Blau
+CB20169I: X GrÅn
+CB20170I: X Cyan
+CB20171I: X Rot
+CB20172I: X Magenta
+CB20173I: X Braun
+CB20174I: X Weiss
+CB20175I: X Grau
+CB20176I: X Hellblau
+CB20177I: X HellgrÅn
+CB20178I: X Hellcyan
+CB20179I: X Hellrot
+CB20180I: X Hellmagenta
+CB20181I: X Gelb
+CB20182I: X Hellweiss
+CB20183I:
+CB20184I:
+CB20185I:

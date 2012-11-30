@@ -1,0 +1,75 @@
+#ifndef OS2_INCLUDED
+   #include <os2.h>
+#endif
+DLGINCLUDE 1 "CB2.h"
+
+DLGTEMPLATE CB2_DIALOG LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "CD Boot/2", CB2_DIALOG, -35, -10, 500, 234, FS_MOUSEALIGN | 
+            WS_VISIBLE, FCF_SYSMENU | FCF_TITLEBAR
+    BEGIN
+        GROUPBOX        "@ CD Boot/2: @", CDGRP_CDBOOT2, 3, 17, 493, 215, 
+                        NOT WS_GROUP
+        GROUPBOX        "@ Settings: @", CDGRP_SETTINGS, 10, 175, 478, 48
+        LTEXT           "@ Drive @:", CDST_DRIVE, 17, 204, 115, 8, NOT 
+                        WS_GROUP
+        CONTROL         "", CDCBX_DRIVE, 136, 175, 40, 39, WC_COMBOBOX, 
+                        CBS_DROPDOWN | WS_TABSTOP | WS_VISIBLE
+        LTEXT           "@ CD2BOOT @:", CDST_CD2BOOT, 17, 193, 115, 8, NOT 
+                        WS_GROUP
+        ENTRYFIELD      "", CDEF_CD2BOOT, 138, 193, 141, 8, ES_MARGIN | 
+                        ES_READONLY
+        LTEXT           "@ Seconds @:", CDST_SECONDS, 17, 181, 115, 8, NOT 
+                        WS_GROUP
+        ENTRYFIELD      "", CDEF_SECONDS, 138, 181, 35, 8, ES_MARGIN | 
+                        ES_READONLY
+        CONTROL         "", CDHSB_SECONDS, 181, 181, 100, 8, WC_SCROLLBAR, 
+                        SBS_HORZ | WS_TABSTOP | WS_VISIBLE
+        AUTORADIOBUTTON "@Harddisk @", CDRB_DEFAULTHARDDISK, 303, 203, 180, 
+                        10, WS_GROUP | WS_TABSTOP
+        AUTORADIOBUTTON "@ Removeable @", CDRB_DEFAULTREMOVEABLE, 303, 192, 
+                        179, 10, WS_TABSTOP
+        AUTOCHECKBOX    "@ Clear Screen  @", CDCB_CLEARSCREEN, 303, 180, 135, 
+                        10, WS_GROUP
+        GROUPBOX        "@ Password: @", CDGRP_PASSWORD, 11, 147, 278, 26
+        AUTOCHECKBOX    "@ Password: @", CDCB_PASSWORD, 17, 153, 115, 10
+        ENTRYFIELD      "", CDEF_PASSWORD, 138, 154, 141, 8, ES_MARGIN | 
+                        WS_DISABLED
+        GROUPBOX        "@ Advanced: @", CDGRP_ADVANCED, 296, 147, 192, 26
+        AUTOCHECKBOX    "@ Advanced Harddisk Boot @", CDCB_BMBOOT, 303, 153, 
+                        178, 10
+        GROUPBOX        "@ Copyright: @", CDGRP_COPYRIGHT, 11, 84, 478, 61
+        LTEXT           "@ Copyright Color @:", CDST_COPYRIGHT_COLOR, 17, 
+                        126, 115, 8, NOT WS_GROUP
+        CONTROL         "", CDCBX_COPYRIGHT_COLOR, 136, 88, 145, 48, 
+                        WC_COMBOBOX, CBS_DROPDOWNLIST | WS_TABSTOP | 
+                        WS_VISIBLE | WS_DISABLED
+        ENTRYFIELD      "", CDEF_COPYRIGHT1, 19, 114, 460, 8, ES_MARGIN | 
+                        ES_AUTOTAB | ES_READONLY
+                        PRESPARAMS PP_FONTNAMESIZE, "8.Courier"
+        ENTRYFIELD      "", CDEF_COPYRIGHT2, 19, 102, 460, 8, ES_MARGIN | 
+                        ES_AUTOTAB | ES_READONLY
+                        PRESPARAMS PP_FONTNAMESIZE, "8.Courier"
+        ENTRYFIELD      "", CDEF_COPYRIGHT3, 19, 90, 460, 8, ES_MARGIN | 
+                        ES_AUTOTAB | ES_READONLY
+                        PRESPARAMS PP_FONTNAMESIZE, "8.Courier"
+        GROUPBOX        "@ Custommessage: @", CDGRP_CUSTOMMESSAGE, 11, 21, 
+                        478, 62
+        LTEXT           "@ Custom Color: @", CDST_CUSTOMMESSAGE_COLOR, 17, 
+                        62, 115, 8
+        CONTROL         "", CDCBX_CUSTOMMESSAGE_COLOR, 136, 25, 145, 48, 
+                        WC_COMBOBOX, CBS_DROPDOWNLIST | WS_TABSTOP | 
+                        WS_VISIBLE
+        ENTRYFIELD      "", CDEF_CUSTOMMESSAGE1, 19, 51, 460, 8, ES_MARGIN | 
+                        ES_AUTOTAB
+                        PRESPARAMS PP_FONTNAMESIZE, "8.Courier"
+        ENTRYFIELD      "", CDEF_CUSTOMMESSAGE2, 19, 39, 460, 8, ES_MARGIN | 
+                        ES_AUTOTAB
+                        PRESPARAMS PP_FONTNAMESIZE, "8.Courier"
+        ENTRYFIELD      "", CDEF_CUSTOMMESSAGE3, 19, 27, 460, 8, ES_MARGIN | 
+                        ES_AUTOTAB
+                        PRESPARAMS PP_FONTNAMESIZE, "8.Courier"
+        DEFPUSHBUTTON   "@ ~Install @", DID_OK, 3, 1, 65, 14
+        PUSHBUTTON      "@ ~Cancel @", DID_CANCEL, 432, 1, 65, 14
+    END
+END

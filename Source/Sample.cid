@@ -1,0 +1,12 @@
+#
+# To request CD Boot/2 to read the options (commandline parameters)
+# from this file, just run: CDBoot/CDBootPM /Cid Sample.cid
+#
+/MSG1 "Welcome to the bootable installation CD-ROM for EasyRestore"
+/MSG3 Copyright (C) Interactive Magic, 2002
+; Additional parameters
+/Harddisk
+/Clear
+/BM
+/Password Aurora
+

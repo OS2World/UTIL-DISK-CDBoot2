@@ -1,0 +1,1037 @@
+<!doctype html public "-//IETF//DTD HTML 3.2//EN">
+<html>
+<head>
+<center><title>The official CD Boot/2 home page</title></center>
+<meta name="description" content="Official CD Boot/2 homepage">
+<meta name="keywords" content="Roman Stangl, CD Boot/2, CD boot loader, OS/2, official release">
+<meta name="owner"    content="Roman_Stangl@at.ibm.com">
+<meta name="review"   content="22.05.2002">
+<meta name="security" content="public">
+</head>
+<body background="..\Images\Os2Warp.gif">
+<font Face="Helv,Helvetica,Arial">
+<h1>The CD Boot/2 home page</h1>
+<p>
+<h2>What is CD Boot/2</h2>
+Welcome to the home of <em>CD Boot/2</em>, a utility to modify the boot sector
+of a removeable FAT media so that either:
+<ul>
+<li>the boot process continues to boot from the first harddisk instead of the
+removeable media
+</ul>
+or
+<ul>
+<li>the boot process continues to boot from the removeable media if you press
+the spacebar within a configurable period of time
+</ul>
+That makes most sense when you want to prepare a singe bootable OS/2 installation CD-ROM
+instead of the 2 CDs (one bootable CD-ROM that during the boot process has to be
+replaced by a non bootable CD-ROM containing the OS/2 installation code) what IBM ships 
+with recent OS/2 versions (Aurora, Aurora and Merlin Convenience Pack).
+<p>
+Beginning with version 1.40 it should be possible to apply the same procedure on
+FAT-based removeable media that were not written by OS/2 but e.g. 
+<a href="CDBoot2.html#DOSBOOT">DOS</a>.
+I strongly recommend to read the documentation as there is no guarantee that it
+will work, though according to my test it likely will (at least when 512-Byte
+bootsectors are used).
+<p>
+With such a CD-ROM you only have to ensure that during the initial boot process you press
+the spacebar to continue booting from the CD-ROM, for all subsequent reboots that are 
+required during OS/2 installation you can just keep the CD-ROM inserted in the drive.
+A bootable OS/2 CD-ROM modified/created with CD Boot/2 will automatically continue booting 
+from the first harddisk (which is what the BIOS would do if no bootable CD-ROM had been
+inserted into the CD-ROM drive), you no longer would have to care to remove and
+reinsert the CD-ROM timely during the phases of the installation process.
+<p>
+Immediately after the boot process from the CD-ROM has begun, the following menu
+might be displayed:
+</font>
+<xmp>
+CD2BOOT - CD Boot/2 V2.00
+Copyright (C) Roman Stangl (Roman_Stangl@at.ibm.com) 05, 2002
+          http://www.geocities.com/SiliconValley/Pines/7885/
+
+Please press the key for the media (> is default) you want to boot from:
+
+  >1 ... From the first harddisk
+   2 ... From the removeable media
+
+Please select within 10 seconds, or boot continues from the default media!
+</xmp>
+<font Face="Helv,Helvetica,Arial">
+<p>
+That means that if you press the <b>2</b>-Key within the next (in this example configured
+to) 10 seconds (of course the countdown to 0 runs in real-time), the boot process 
+continues to boot from the removeable media (probably a CD-ROM), or if you let 
+that period expire or press the <b>1</b>-Key, CD Boot/2 will continue to boot 
+from the first harddisk.
+<p>
+To boot from the selected media (first harddisk in above example) you can also use 
+the <b>Enter</b>-Key or to boot from the not selected media (removeable media
+in this case) you can also use the <b>Spacebar</b>-Key, alternatively.
+<p>
+So to install OS/2 from a bootable OS/2 CD-ROM prepared with CD Boot/2 you would just
+press the spacebar when the CD-ROM is booted to begin the OS/2 installation (possibly also for
+the second reboot too if you haven't run LVM before), you then just keep the CD-ROM
+inserted in the drive and let the period expire so that the first harddisk is booted.
+<p>
+However CD Boot/2 is very customizable, so for example you might be welcome'd
+by a menu looking like:
+</font>
+<xmp>
+CD2BOOT - CD Boot/2 V2.00
+Copyright (C) Roman Stangl (Roman_Stangl@at.ibm.com) 05, 2002
+          http://www.geocities.com/SiliconValley/Pines/7885/
+
+Welcome to the bootable installation CD-ROM for Easyrestore (R) Version 1.10!
+For new installations, press the 2-Key and enter your license password.
+Copyright (C) Interactive Magic, 2002
+
+Please press the key for the media (> is default) you want to boot from:
+
+  >1 ... From the first harddisk
+   2 ... From the removeable media
+
+Please enter Password to boot removeable media:War_
+</xmp>
+<font Face="Helv,Helvetica,Arial">
+<p>
+Above screen was captured after the <b>Spacebar</b> was used to request CD Boot/2
+to continue booting from the removeable media (one could have used
+the <b>2</b>-Key instead), and as the customized instructions (they are
+just a sample, you can of course insert you own instead) show booting
+from the removeable media requires to enter a password which has been
+entered almost completely (just the last letter <b>p</b> is still missing at
+the cursor postion).
+<p>
+<b>Note!</b> If you want to use CD Boot/2 in a CID (Configuration, Installation,
+Distribution) environment where you want to run applications unattended, I recommend
+using the AVIO version <b>CDBOOT.EXE</b> instead of the PM version
+<b>CDBOOTPM.EXE</b>, because the first will not wait for any user input, whereas
+the second version will display message boxes waiting for the user to click them
+away in case of errors during execution.
+It will also wait for the user to close the application.
+However, both versions will set the return code appropriately. 
+<p>
+<h2><a name="CDBOOT2HELP">Using CD Boot/2</a></h2>
+<p>
+This page concentrace on creating bootable OS/2 CD-ROMs, as this page is complex
+enough the details of <a href="CDBoot2Help.html">using CD Boot/2</a> have been
+excluded here.
+<p>
+That page also allows you to <b>download CD Boot/2 including its sources</b>!
+<p>
+<h2><a name="OS2BOOT">How OS/2 boots</a></h2>
+<p>
+In order to get an idea what CD Boot/2 does under the covers you first need to know
+how OS/2 boots from a removeable FAT media, a diskette drive being the most prominent
+example.
+The following things happen (using the same approach as in 1981 when IBM initially
+released the first IBM PC):
+<ol>
+<li>After you have powered on your PC or you have reset it via ALT+CTRL+DEL, BIOS
+(Basic Input Output System) gains control running in Real-Mode (so everything
+at this time happens within the first 640kB or memory) of Intel and
+compatible processors.
+<p>
+<li>BIOS loads the absolutely first sector from the removeable media at the memory
+location 0000:7C00 and checks if that sector is a valid boot sector (a valid boot sector, as a valid
+partition table, ends with 0x55AA in the last 2 bytes).
+<p>
+<li>If a valid boot sector was found, BIOS transfers control to it by jumping to
+0000:7C00.
+A vaild boot may be created by DOS, OS/2, LINUX, WIN NT, W2K, ... but we concentrace
+on OS/2 here.
+<p>
+<li>A OS/2 boot sector on a removeable media sets and checks a few things
+and tries to load the FAT (File Allocation Table) into memory at 1000:0000.
+Then the FAT is checked for the entry of the file "<b>OS2BOOT    </b>" (and
+that file is different between FAT and HPFS drives, but HPFS can't be
+booted from removeable media anyway, so we can safely ignore that).
+<p>
+<li>If "<b>OS2BOOT    </b>" can be found in the FAT, the boot sector code loads
+the file "<b>OS2BOOT    </b>" (the spaces are correct, as FAT has a 8+3 naming
+convention and shorter names are stored with padding blanks in a FAT) 
+into memory at 0800:0000 and transfers control to it by jumping to 0800:0000.
+The stack typically points to 0000:7B00 then.
+If anything fails, then the famous <b>OS/2 !! SYS02025</b> and <b>OS/2 !! SYS02027</b>
+messages (which under DOS used to be <b>Non-System disk or disk error. Replace and
+press any key when ready</b>) are displayed.
+<font color="red"><b>OS2BOOT must not be fragmented!</b></font> CD2BOOT will display
+<font color="green"><b>CD2BOOT is fragmented - System stopped! Press ALT+CTRL+DEL to 
+reboot!</b></font> when it detects being not written (by CDBOOT/CDBOOTPM) or loaded
+(by BIOS) correctly.
+In doubt I recommend you to run a defragmentation program.
+The requirement that the boot sector can not load a fragmented file is an inherent
+limitation, because the boot loader must fit into the 512 bytes of the boot sector
+and there is not enough space to handle fragmentation.
+<p>
+<li><b>OS2BOOT</b> (which on FAT is just a loader whereas on HPFS it is a
+Micro HPFS-Filesystem driver and loader) then continues the boot process by
+loading <b>OS2LDR</b>, the OS/2 loader which then loades <b>OS2KRNL</b>, the
+OS/2 Kernel. 
+</ol>
+<h2><a name="CD2BOOT">How OS/2 boots after CD Boot/2 has been run</a></h2>
+<p>
+After you have run CD Boot/2 against a bootable removeable FAT media, the boot process
+is enhanced with a few steps which of course do not cause any harm to any other
+media.
+The following things happen:
+<ol>
+<li>Again, the starting point is in the BIOS running in Real-Mode.
+<p>
+<li>Again, the absolutely first sector from the removeable media is loaded
+at the memory location 0000:7C00 and verified.
+<p>
+<li>Again, control is transferred to 0000:7C00 by BIOS.
+<p>
+<li>Again, the FAT is located and loaded into memory at 1000:0000.
+Now however, instead of searching the FAT for the entry of the file 
+"<b>OS2BOOT    </b>", the boot sector code searches for entry of the file 
+"<b>CD2BOOT    </b>", which is a small file that CD Boot/2 has added to the 
+removeable media.
+<p>
+<li>If "<b>CD2BOOT    </b>" can be found in the FAT, the boot sector code loads
+"<b>OS2BOOT    </b>" into memory at 0800:0000 and transfers control to it by jumping 
+to 0800:0000.
+If anything fails, then the famous <b>OS/2 !! SYS02025</b> and <b>OS/2 !! SYS02027</b>
+messages are displayed.
+<p>
+<li><b>CD2BOOT</b> which is the additional step added to the boot process by CD Boot/2
+then displays its messages and waits the configured period of time for the user to
+press the spacebar.
+<p>
+<li>Depending on the user selection, <b>CD2BOOT</b> does either:
+<ul>
+<li>move the original OS/2 boot sector (the one that looks for "<b>OS2BOOT    </b>",
+and which CD Boot/2 has copied into the file CD2BOOT)
+to the memory location 0000:7C00 and transfers control to it by jumping to
+0000:7C00.
+<br>
+<font color="red"><b>Again, CD2BOOT must not be fragmented!</b></font>
+As <b>CD2BOOT</b> is larger than <b>OS2BOOT</b> it is more likely that it will be
+fragmented, to be on the safe side just run a defragmentation program after CD Boot/2
+has been run!
+<font color="red">The media will not boot if <b>CD2BOOT</b> is fragmented!</font>
+CD2BOOT will display <font color="green"><b>CD2BOOT is fragmented - System stopped! 
+Press ALT+CTRL+DEL to reboot!</b></font> when it detects being not written 
+(by CDBOOT/CDBOOTPM) or loaded (by BIOS) correctly.
+<br>
+The original OS/2 boot sector code then continues to boot from the removeable media
+as outlined above (by loading <b>OS2BOOT</b> and transfering control to it, which then
+loads <b>OS2LDR</b> and finally <b>OS2KRNL</b>.
+</ul>
+or
+<ul>
+<li>load the partition table of the first harddisk at memory location 0000:7C00 and
+transfers control to it by jumping to 0000:7C00.
+Note, if no removeable media had been inserted into the drive, BIOS would have started
+to load the partition table of the first harddisk.
+<br>
+Thus, with CD Boot/2 the effect as if having no bootable removeable media inserted can
+be achieved while still having inserted a bootable removeable media!
+</ul>
+</ol>
+So, CD Boot/2 does nothing more than adding a small step that allows the user to
+select how the early steps in the boot process (before the OS itself gains control)
+performed.
+<p>
+<p>
+<h2><a name="DOSBOOT">How DOS (or any FAT based boot loader) boots after CD Boot/2 has been run</a></h2>
+<p>
+First, how do you run CD Boot/2 against a FAT-based removeable media (e.g.
+written by DOS):
+<ol>
+<li>You can run CD Boot/2 against a removeable media that has been FAT-formatted
+by an operating system other than OS/2 as you would if the media had been
+formatted by OS/2.
+<p>
+<li>However, you can run CD Boot/2 only once against that media, that is, if
+you need to rerun CD Boot/2 against it, you have to format it with
+the operating system before.
+Otherwise you won't destroy that media, but it will not boot (due to the
+limitations on how the boot process is modified to be partly based on OS/2).
+<p>
+<li>If you have run CD Boot/2 against that FAT-base removeable media,
+you will receive the famous <b>OS/2 !! SYS01475</b> and <b>OS/2 !! SYS02027</b>
+messages instead of the usual e.g. DOS messages you might know:
+<b>Non-System disk or disk error</b> and <b>Replace and press any key when ready</b>.
+</ol>
+<p>
+Second, what does CD Boot/2 differently for a FAT-base removeable media like 
+e.g. written by DOS compared to an OS/2 formatted media:
+<ol>
+<li>If CD Boot/2 detects that the removeable media is FAT-based, but not formatted
+with OS/2, it will replace the bootsector by a modified OS/2 bootsector.
+It will also patch the original bootsector found on the removeable media into
+<b>CD2BOOT</b>, and will write that file onto the removeable media.
+<p>
+And that logic causes the limitation that you can run CD Boot/2 only once against
+a non-OS/2 formatted removeable media.
+If you would run it a second time, <b>CD2BOOT</b> will be patched by the
+modified OS/2 bootsector that <b>CD2BOOT</b> has installed in the previous
+run as the bootsector, instead of the orginial non-OS/2 (e.g. DOS) bootsector.
+<p>
+<li>When that modified OS/2 bootsector gains control, it will load the 
+<b>CD2BOOT</b> modified in above step from the removeable media and passes
+control to it.
+<p>
+<li>The code within <b>CD2BOOT</b> will then display the same boot menu as
+you already know from OS/2, giving you the choice to continue booting from 
+the removeable media (if you press the Spacebar before the timeout period
+expires) or continues booting from the first harddisk.
+<p>
+<li>If you chose to continue booting from the removeable media, the code
+within <b>CD2BOOT</b> will load the original non-OS/2 FAT-based bootsector
+and passes control to it.
+It is then up to that bootsector code what will happen further, e.g. for
+DOS it will start booting DOS. 
+</ol>
+<p>
+And third, some suggestions on where you might want to run CD Boot/2 
+against a non-OS/2 formatted FAT-based removeable media:
+<ul>
+<li>You want to create a bootable DOS CD-ROM which you use to install DOS or
+to backup/restore partitions with tools like Partition Magic or Norton Ghost
+from a bootable DOS CD-ROM.
+<p>
+<li>You may want to create a bootable WINxx CD-ROM (it is quite possible
+to create a bootable CD-ROM where you use the bootable WINxx installation 
+diskette as the bootimage for a CD-ROM, and to avoid swapping the CD-ROM
+during each reboot in the installation process, you might want to
+modify that diskette (hopefully a copy of it!) with CD Boot/2 previously).
+<p>
+<li>You want to make a bootable CD-ROM booting from an updated Linux boot
+diskette (AFAIK RedHat bootable diskettes are FAT-based, so modifying them
+with CD Boot/2 should work).
+</ul>
+<p>CD Boot/2 will tell you if it detects a non-OS/2 written bootsector.
+If it then detects that this bootsector is FAT-based (e.g. written by DOS
+or Linux in VFAT format) it will issue an informational message that
+it this will likely work.
+However, if it then detect that the bootsector is not FAT-base, it will
+issue a warning message that this will likely not work, but still does
+continue to modify it.
+<p>
+<h2>Preparing a diskette to create bootable OS/2 CD-ROMs</h2>
+<p>
+A bootable CD-ROM, and for OS/2 this is no exception, the El Torito specification is
+used.
+As you can easily find more details on the Internet, here just the principle in short.
+<p>
+During creation of a bootable CD-ROM, you have to specify the image of a diskette
+which the BIOS (and thus is only available as long a BIOS services are used)
+of a PC capable of booting from CD-ROMs then uses as a logical replacement
+of the physical diskette drive A: (in other words, all BIOS accesses to the diskette
+drive A: are rerouted into that diskette image).
+Thus, if that image is a bootable diskette, the CD-ROM BIOS replaces the diskette
+drive A: with the contents of that image as long BIOS is used in the boot process
+(e.g. if you create a bootable DOS CD-ROM, you will access that diskette image when
+doing a <b>DIR A:</b> as DOS is just a small add-on to BIOS, if you create a bootable
+OS/2 CD-ROM you need a special driver so that that diskette image is still used when
+BIOS services are no longer available, and the OS/2 drivers <b>CD_BOOT.FLT</b> 
+supplied by IBM or <b>DANIBOOT.FLT</b> supplied by Daniela Engert are
+such a driver)..
+<p>
+In other words, to create a bootable CD-ROM you have not much more to do than to
+create a bootable diskette, create an image out of it and specify that image during
+CD-ROM creation. 
+Usually, that image can be easily achived by imaging a 1.44MB diskette, however
+as the files required to boot OS/2 do not fit on a single 1.44MB diskette you
+have to use a 2.88MB diskette to boot OS/2 instead.
+Creating a bootable DOS CD-ROM, a 1.44MB diskette is quite enough, and that is also
+a good starting point if you haven't created a bootable CD-ROM (on a CD-R or
+CD-RW media) anyway.
+<p>
+Luckily, even as 2.88MB diskette drives didn't became standard, you can use
+a virtual drive under OS/2 instead, like e.g. from the IBM EWS Package
+<b> <a href="http://w3.hethmon.com/os2isp/1997/Oct/Msgs/Files/vfdisk.zip">VFDisk</a></b>.
+To create a logical 2.88MB diskette drive, you would have to add
+<b>DEVICE=d:\OS2\BOOT\VFDISK.SYS 4</b> into your <b>CONFIG.SYS</b>.
+<p>
+You can use the IBM EWS 
+<b><a href="http://hobbes.nmsu.edu/pub/os2/util/disk/loaddf.zip">SAVEDSKF</a></b> 
+and/or <b><a href="http://hobbes.nmsu.edu/pub/os2/system/patches/fixpack/dskxtr12.zip">LOADDSKF</a></b> 
+to fill that virtual diskette
+drive from an image or to create an image out of the virtual diskette drive.
+Under OS/2 you have another way to test if your virtual diskette is really
+bootable by creating an <b>Image File of a DOS Startup Diskette</b> with
+<b>VMDISK</b>, which is part of OS/2 to boot special DOS versions (of course
+a bootable OS/2 diskette image will finally fail somewhere while loading <b>OS2LDR</b>
+or <b>OS2KRNL</b> as OS/2 isn't really a DOS, but all steps of the boot
+process, including the modifications done by CD Boot/2, mentioned above can 
+be tested that way!).
+Just use the command <b>VMDISK x: d:\CD2Boot.Img</b> to build an <b>Image File 
+of a DOS Startup Diskette</b> out of the virtual 2.88MB diskette drive <b>x:</b>
+and then start it with <b>DOS from Drive A:</b> which you can find in OS/2's
+<b>Command Prompts</b> folder.
+<p>
+Alternatively you may test is in a virtual machine such as 
+<a href="http://www.innotek.de/">VirtualPC</a> or under Linux or Windows with
+<a href="http://www.vmware.com/">VMWare</a> (though it does not support a OS/2 guest, 
+so booting a bootable OS/2 media will finally fail. They once had a beta 
+supporting a guest OS/2 operating system, but that never went into a product, 
+probably due to some pressure from MS as VMWare seems to have close relations 
+to them.
+You can still use it to test the first steps of e.g. a bootable OS/2 CD-ROM,
+and while you can download the program from <a href="http://www.vmware.com/">VMWare</a>
+itself, you can find the necessary <a href="http://astalavista.box.sk/">cracks</a>
+(for their non OS/2 support <em>revenge is sweet</em>, that's why I mention the
+crack though generally I suggest you buy the programs you find useful and are
+using more frequently than just for test purposes, especially to support the
+remaining OS/2 vendors!).
+<p>
+<h2>Using CD Boot/2 to create/modify a bootable OS/2 diskette for a bootable
+OS/2 CD-ROM</h2>
+<p>
+As said above, a bootable OS/2 diskette requires the use of a 2.88MB diskette,
+which may be a virtual drive in case you lack of a physical 2.88MB diskette
+drive (which would be very slow anyway compared to a RAM disk).
+In principle, there are 2 ways how you can get to a bootable 2.88MB OS/2
+diskette (the original one in the configuration IBM ships with bootable
+OS/2 CD-ROMs):
+<ul>
+<li>If you own Aurora or the Aurora/Merlin Convenience Pack (ACP/MCP) then you
+have received (beside others) 2 CD-ROMs to install OS/2 from, a bootable OS/2 
+CD-ROM which after loading the OS/2 Kernel and drivers prompts you to replace it by a
+non bootable OS/2 CD-ROM containing the OS/2 installation code.
+<p>
+On those CDs you can find the image of the 2.88MB diskette that is used to
+boot from CD-ROM.
+Usually you can find it in the directory <b>\BOOTIMGS</b>, so to extract
+the image onto a (physical or virtual) bootable 2.88MB diskette, you could run
+<b>LOADDSKF Disk_0_1.Img x: /y</b> where <b>x:</b> is the (physical or
+virtual) diskette drive.
+</ul>
+or
+<ul>
+<li>You can create that bootable 2.88MB diskette <b>x:</b> yourself too.
+You would have to:
+<ol>
+<li>ensure that you can write onto that 2.88MB medium, e.g. by running
+<b>FORMAT x:</b> against it
+<li>ensure that it is a booteable OS/2 media by running the command
+<b>\OS2\INSTALL\BOOTDISK\SYSINSTX x:</b> against it
+<li>Copy the contents of the <b>OS/2 Installation</b> diskette onto that media
+by running <b>XCOPY A:\* x:\ /h/o/t/s/e/r/v</b> (you can ignoring the warnings
+about some files that can't be copied, because they are part of the EA (Extended
+Attributes) support on FAT filesystems)
+<li>Copy the contents of the <b>OS/2 Warp Diskette 1</b> diskette onto that media
+using the same instructions as in the last step
+<li>rename <b>OS2KRNLI</b> (with that name the OS/2 Kernel prompts you
+to insert diskette 1 which doesn't really make sense for
+bootable CD-ROMs) to <b>OS2KRNL</b>
+<li>copy the driver <b>CD_BOOT.FLT</b> (can by found either in the diskette images
+that are used for the bootable OS/2 CD-ROMs IBM shipped or in the
+<b><a href="http://hobbes.nmsu.edu/pub/os2/system/drivers/cdrom/cdboot.zip">CDBOOT</a></b> 
+package) onto that diskette and modify its parameter <b>/D:n</b>, where <b>n</b>
+corresponds to the number of 1.44MB medias required to boot (a 2.88MB
+media counts as 2 1.44MB medias).
+Alternatively you may use Daniela Engert's <b>DANIBOOT.FLT</b> driver, which you
+should easily find on <a href="hobbes.nmsu.edu">Hobbes</a>.
+<li>modify the <b>CONFIG.SYS</b> so that it works for a bootable OS/2 CD-ROM:
+</font>
+<table BORDER=2 CELLSPACING=2 CELLPADDING=2 WIDTH="100%">
+<tr>
+<td WIDTH="50%"><center>Bootable Diskette image</center></td>
+<td WIDTH="50%"><center>Bootable CD-ROM</center></td>
+</tr>
+<tr>
+<td>
+<xmp>
+buffers=32
+iopl=yes
+memman=swap,delayswap
+protshell=sysinst1.exe
+set os2_shell=cmd.exe
+diskcache=D2,LW
+protectonly=yes
+libpath=.;\;\os2\dll;\os2\install;
+ifs=jfs.ifs
+ifs=hpfs.ifs /c:64
+pauseonerror=no
+codepage=850
+devinfo=kbd,us,keyboard.dcp
+devinfo=scr,ega,vtbl850.dcp
+device=\dos.sys
+device=\mouse.sys
+set path=\;\os2;\os2\system;\os2\install
+set dpath=\;\os2;\os2\system;\os2\install
+set keys=on
+basedev=ibmkbd.sys
+basedev=i2oxport.sys
+basedev=i2ososm.add
+basedev=ibm1flpy.add
+basedev=ibm1s506.add
+basedev=ibm2flpy.add
+basedev=ibm2scsi.add
+basedev=dac960.add
+basedev=ipsraid.add
+basedev=ibmint13.i13
+basedev=os2dasd.dmd
+basedev=os2lvm.dmd
+device=\testcfg.sys
+
+basedev=aha152x.add
+basedev=aha154x.add
+basedev=aha164x.add
+basedev=aha174x.add
+basedev=aic7770.add
+basedev=aic7870.add
+basedev=aic78u2.add
+basedev=dpt20xx.add
+basedev=flashpt.add
+basedev=ql10os2.add
+basedev=ql40os2.add
+basedev=ql510.add
+basedev=ibmatapi.flt
+basedev=ibmidecd.flt
+basedev=xdfloppy.flt
+
+set os2_shell=cdinst.exe
+set saveconnect=1
+set cdrominst=1
+ifs=cdfs.ifs /q
+device=\os2cdrom.dmd
+device=\refpart.sys
+set os2_shell=cdboot.exe
+set oemprogram=\ibminst\npconfig.exe
+set exitwhendone=1
+
+</xmp>
+</td>
+<td>
+<xmp>
+buffers=32
+iopl=yes
+memman=swap,delayswap
+protshell=sysinst1.exe
+set os2_shell=cmd.exe
+diskcache=D2,LW
+protectonly=yes
+libpath=.;\;\os2\dll;\os2\install;
+ifs=jfs.ifs
+ifs=hpfs.ifs /c:64
+pauseonerror=no
+codepage=850
+devinfo=kbd,us,keyboard.dcp
+devinfo=scr,ega,vtbl850.dcp
+device=\dos.sys
+device=\mouse.sys
+set path=\;\os2;\os2\system;\os2\install
+set dpath=\;\os2;\os2\system;\os2\install
+set keys=on
+basedev=ibmkbd.sys
+basedev=i2oxport.sys
+basedev=i2ososm.add
+basedev=ibm1flpy.add /A:0 /FORCE:1 /U:0 /F:2.88MB
+basedev=ibm1s506.add
+basedev=ibm2flpy.add
+basedev=ibm2scsi.add
+basedev=dac960.add
+basedev=ipsraid.add
+basedev=ibmint13.i13
+basedev=os2dasd.dmd
+basedev=os2lvm.dmd
+device=\testcfg.sys
+
+basedev=aha152x.add
+basedev=aha154x.add
+basedev=aha164x.add
+basedev=aha174x.add
+basedev=aic7770.add
+basedev=aic7870.add
+basedev=aic78u2.add
+basedev=dpt20xx.add
+basedev=flashpt.add
+basedev=ql10os2.add
+basedev=ql40os2.add
+basedev=ql510.add
+basedev=ibmatapi.flt
+basedev=ibmidecd.flt
+basedev=cd_boot.flt /D:3
+
+set os2_shell=cdinst.exe
+set saveconnect=1
+set cdrominst=1
+ifs=cdfs.ifs /q
+device=\os2cdrom.dmd
+device=\refpart.sys
+set os2_shell=cdboot.exe
+set oemprogram=\ibminst\npconfig.exe
+set exitwhendone=1
+set bootedfromcd=yes
+</xmp>
+</td>
+</tr>
+</table>
+<font Face="Helv,Helvetica,Arial">
+(There are only minimal differences at the <b>IBM1FLPY.ADD</b> driver, the replacement of 
+<b>BASEDEV=XDFLOPPY.FLT</b> with <b>BASEDEV=CD_BOOT.FLT /D:3</b> and the addition
+of <b>SET BOOTEDFROMCD=YES</b>, just be sure that you keep the correct sequence of the
+drivers!).
+</ol>
+</ul>
+and
+<ul>
+<li><font color="red"><b>Be sure that the media is not fragmented!</b></font>
+If you doubt run a defragmentation program, preferably an OS/2 one that can
+handle extended attributes (though I doubt that a bootable OS/2 diskette needs
+extended attributes, so even a DOS defragmentation program should be sufficient)!
+</ul>
+Now you have a bootable 2.88MB OS/2 diskette which now needs to be modified to change
+the boot sequence from <a href="CDBoot2.html#OS2BOOT"><b>How OS/2 boots</b></a> to 
+<a href="CDBoot2.html#CD2BOOT"><b>How OS/2 boots after CD Boot/2 has been run</b></a>.
+To run CD Boot/2 you either run <b>CDBOOT</b>, which is a AVIO (Advanced Video I/O) application
+that can be run in an OS/2 windowed or fullscreen session, or run <b>CDBOOTPM</b>, which 
+is a PM executable.
+There is no difference between both other than the user interface.
+Also, both are able to find their code and data files so you don't have to
+run them from the directory they were installed into!
+<p>
+For example, running <b>CDBOOT</b> interactively might result in the following log (<b>Q:</b>
+is a virtual 2.88MB diskette drive where the bootable diskette image <b>DISK_0_1.IMG</b>
+from MCP has been <b>LOADDSKF</b>'d onto):
+</font>
+<xmp>
+CB20011I: Initializing CD Boot/2 environment ...
+CB20012I: Loading CD Boot/2 messagefile ...
+                                CD Boot/2 V2.00
+             (C) Roman Stangl (Roman_Stangl@at.ibm.com)  05, 2002
+              http://www.geocities.com/SiliconValley/Pines/7885/
+CB20013I: CD Boot/2 runs under the PM evironment ...
+CB20021I: Loading CD Boot/2 code DLL...
+CB20060I: Initializing CD Boot/2 ...
+CB20080I: The drive(s) A, B, P, Q seem to support removeable media on which the
+CD Boot/2 Boot Loader can be installed onto.
+CB20081Q: On which drive to you want to install CD Boot/2? Q
+CB20082I: CD Boot/2 allows to define a period from 1 to 60 seconds in which
+pressing the keys 1 or 2 allows you to boot from another media than the default
+selection.
+CB20083Q: How many seconds should CD Boot/2 wait? 10
+CB20084I: Reading the bootsector from the removeable media Q:.
+CB20085I: Reading the CD2BOOT code from file H:\CDBOOT2\SOURCE\CD2BOOT.
+CB20086W: The bootsector from the removeable media H:\CDBOOT2\SOURCE\CD2BOOT
+was already modified by running CD Boot/2! CD Boot/2 will act accordingly.
+CB20087I: Writing the CD2BOOT code into file Q:\CD2BOOT.
+CB20088I: Modifying the OS/2 bootsector to load CD2BOOT instead of OS2BOOT.
+CB20089I: Writing the modified bootsector onto the removeable media Q:.
+CB20061I: Waiting for CD Boot/2 to terminate ...
+</xmp>
+<font Face="Helv,Helvetica,Arial">
+<p>
+You may notice that CD Boot/2 tells that CD Boot/2 has already been run once.
+That happens when you run CD Boot/2 multiple times against the same media in a (physical
+or logical) diskette drive, CD Boot/2 will take care of that situation so you
+can ignore that warning.
+<p>
+In above example, CD Boot/2 was requested to install on drive <b>Q:</b>
+and CD Boot/2 will configure the period where the user can decide to 
+continue booting from the removeable media or from the first harddisk
+with 10 seconds.
+<p>
+Finally, an example for running CD Boot/2 against a bootable DOS installation
+diskette (e.g. which can be used for a bootable DOS or WIN9x installation 
+CD-ROM): 
+</font>
+<xmp>
+CB20011I: Initializing CD Boot/2 environment ...
+CB20012I: Loading CD Boot/2 messagefile ...
+                                CD Boot/2 V2.00
+             (C) Roman Stangl (Roman_Stangl@at.ibm.com)  05, 2002
+              http://www.geocities.com/SiliconValley/Pines/7885/
+CB20013I: CD Boot/2 runs under the PM evironment ...
+CB20021I: Loading CD Boot/2 code DLL ...
+CB20060I: Initializing CD Boot/2 ...
+CB20080I: The drive(s) A, B, M, P seem to support removeable media on which the
+CD Boot/2 Boot Loader can be installed onto.
+CB20081Q: On which drive to you want to install CD Boot/2? A
+CB20082I: CD Boot/2 allows to define a period from 1 to 60 seconds in which
+pressing the keys 1 or 2 allows you to boot from another media than the default
+selection.
+CB20083Q: How many seconds should CD Boot/2 wait? 10
+CB20084I: Reading the bootsector from the removeable media A:.
+CB20085I: Reading the CD2BOOT code from file H:\PROGRAMMING\CDBOOT2\CD2BOOT.
+CB20087I: The bootsector of the removeable media looks like a FAT based
+non-OS/2 bootsector (e.g. from DOS). Likely it is compatible with CD Boot/2.
+CB20089I: Writing the CD2BOOT code into file A:\CD2BOOT.
+CB20090I: Modifying the bootsector of the removeable media to load CD2BOOT
+instead of OS2BOOT.
+CB20091I: Writing the modified bootsector onto the removeable media A:.
+CB20061I: Waiting for CD Boot/2 to terminate ...
+</xmp>
+<font Face="Helv,Helvetica,Arial">
+<p>
+You can see above that CD Boot/2 detected that the diskette looks like a
+FAT based diskette without an OS/2 bootsector.
+<p>
+Of course, you can do the same with the GUI version of CD Boot/2 <b>CDBOOTPM</b>!
+<p>
+<h2>Some words about the CD_BOOT.FLT and DANIBOOT.FLT filter drivers</h2>
+<p>
+The driver <b>CD_BOOT.FLT</b> is somewhat problematic to use, as I'm not sure
+if it can be freely distributed as some packages do (that's why I do not include
+it in the CD Boot/2 package), and it's not really documented.
+<p>
+You could of course use <b>DANIBOOT.FLT</b> instead, another great driver from
+Daniela Engert.
+It not only implements what the IBM driver does, but has even added flexibility
+and certainly chances getting support from her are much better then from IBM.
+<p>
+Some things you may consider are from my experience:
+<ul>
+<li><b>CD_BOOT.FLT</b> is a driver that allows OS/2 to refer to the CD-ROM drive,
+from BIOS has started booting from, to the same drive letter <b>A:</b> in 
+Protected-Mode as BIOS does in Real-Mode.
+<br>
+You may have already heard that OS/2 partly boots in Real-Mode (e.g. some types 
+of drivers are loaded in Real-Mode) and switches to Protected-Mode at a later 
+stage in the boot process and still uses the drivers loaded in Real-Mode.
+It's not too difficult to imagine that if BIOS under Real-Mode simulates drive
+<b>A:</b> from the bootable image on the CD-ROM that OS/2 under Protected-Mode
+still must rely on that being valid.
+<b>CD_BOOT.FLT</b> is a filter driver that continues to represent drive <b>A:</b>
+from the bootable image on the CD-ROM in Protected Mode (you then can
+refer to the physical diskette drive <b>A:</b> by using <b>B:</b> instead), 
+while the normal CD-ROM driver still assigns the CD-ROM drive a normal
+drive letter (that of course can
+be influenced by the <b>SET RESERVEDRIVELETTER=d:</b> statement).
+<li>Once <b>CD_BOOT.FLT</b> has been loaded 2 things hold true:
+<ol>
+<li>Drive <b>A:</B> refers to the bootable image on the CD-ROM
+<li>As OS/2 CD-ROM support must have been already loaded, you can refer the the
+drive letter of the CD-ROM drive (e.g. for loading other drivers from CD-ROM).
+</ol>
+For example, to load OS/2 CD-ROM support you need to specify <b>CDFS.IFS</b>
+before <b>CD_BOOT.FLT</b>, however if you specify to load the <b>HPFS</b> and 
+<b>JFS</b> filesystem drivers after OS/2's CD-ROM Support and after
+<b>CD_BOOT.FLT</b>, you can load both drivers from the CD-ROM (thus getting rid
+of some space from the boot disks).
+<li>If you need to boot OS/2 from more than one disk image (e.g. like MCP/ACP
+does by having a 2.88MB <b>disk_0_1.img</b> and a 1.44MB <b>disk_2.img</b>), 
+those images need to be adjacent on the CD-ROM, the name of the images
+however does not matter.
+<br>
+If the disks are listed in the same order as needed in the boot process
+OS/2 will boot instead of displaying messages of not being able to operate
+your harddisk or finding COUNTRY.SYS.
+<b>CD_BOOT.FLT</b> will only find the next disk image if it immediately
+follows the previous disk image, no file is allowed in between.
+<li>If you want to have multiple bootable images on the CD-ROM, then I strongly
+recommend of putting images that belong together into different subdirectories,
+e.g. make a subdirectories like <b>\BOOT1</b>, <b>BOOT2</b>,...
+<li>On the commandline of <b>CD_BOOT.FLT</b> you have to tell it how many disk
+images it should expect, and that seems to be counted in 1.44MB sizes.
+For example the MCP/ACP bootable CD-ROM contains a 2.88MB image containing the
+contents of the installation diskettes 0 and 1, and a 1.44 MB image of diskette
+2, in sum you need 3 1.44MB, thus you need to specify <b>/D:3</b>.
+For example, if all you need is a single 2.88MB diskette image (as all other
+things will be loaded from the CD-ROM's driver letter after OS/2's CD-ROM
+support has been loaded from that 2.88MB image), then you need to specify
+<b>/D:2</b>.
+<br>
+If you specify <b>/D:n</b> incorrectly, symptoms are that OS/2 tells you not
+being able to operator your harddisk or not finding COUNTRY.SYS and the boot halts. 
+</ul>
+<p>
+So, here are some examples of the output of <b>isoinfo -i cdromimage.iso -l</b>
+(the sequence number just denotes the order the data is listed and
+thus the order the data will be burn onto the CD-ROM, not
+necessarily that the ordinal number of the files on the CD-ROM) and the consequences:
+<ul>
+<li>The first and second OS/2 diskette images are in the correct order, OS/2 thus 
+can boot:
+<ol>
+<li>DISK_0_1.IMG
+<li>DISK_2.IMG
+</ol>
+<li>The second image precedes the first one, OS/2 will not be able to boot:
+<ol>
+<li>DISK_2.IMG
+<li>DISK_0_1.IMG
+</ol>
+<li>Another image (e.g. bootable DOS image) is between the first and second
+image, OS/2 won't find OS/2 code on it:
+<ol>
+<li>DISK_0_1.IMG
+<li>DLS.IMG
+<li>DISK_2.IMG
+</ol>
+<li>Similar to above, if a file is between the first and second image, OS/2
+won't be able to boot too:
+<ol>
+<li>DISK_0_1.IMG
+<li>DISK_1.DOC
+<li>DISK_2.IMG
+</ol>
+</ul>
+<p>
+<h2>What CD Boot/2 does</h2>
+<p>
+CD Boot/2 (with the executables <b>CDBOOT</b> and <b>CDBOOTPM</b>) performs the
+following things after it has started up:
+<ol>
+<li>CD Boot/2 prompts the user (when running interactively, otherwise the drive specified on the
+commandline is taken instead) which removeable media should be modified by CD Boot/2 
+and recommends the drives CD Boot/2 thinks are removeable.
+Allowed are A to Z.
+<li>CD Boot/2 prompts the user (when running interactively, otherwise the timeout specified on
+the commandline is taken instead) how many seconds the period for the user to decide if 
+boot should continue booting from the removeable media or from the first harddisk should last.
+Allowed are 1 to 60 seconds.
+<li>CD Boot/2 then reads the boot sector from the removeable media into memory.
+<li>CD Boot/2 then reads the file <b>CD2BOOT</b> from the directory CD Boot/2
+was installed into and replaces a buffer with the boot sector read in the previous
+step.
+<li>CD Boot/2 writes the modified <b>CD2BOOT</b> file onto the removeable
+media the user specified. 
+<li>CD Boot/2 then replaces the original boot sector on the removeable media
+by a modified one that tries to load <b>CD2BOOT</b> instead of <b>OS2BOOT</b>.
+</ol>
+<p>
+<h2>Creating bootable OS/2 CD-ROMs</h2>
+<p>
+Now that you have created a bootable 2.88MB media and run CD Boot/2 against it
+to add the boot menu, you need to burn a bootable OS/2 CD-ROM.
+While you could use most WIN based CD-ROM authoring programs as they usually
+support creation of bootable CD-ROMs I hope you don't need to switch to the
+evil empire as you can also use excellent OS/2 Freeware for the same purpose!
+<ol>
+<li>I would recommend you check that you have the latest port of 
+<a href="http://www.geocities.com/SiliconValley/Sector/5785/">CDRecord/2</a>, the excellent
+port of CDRecord to OS/2 done by Chris Wohlgemuth (which by the way also explains
+how to build bootable OS/2 CD-ROMs in general not concentrating on bootable
+OS/2 installation CD-ROMs as I do here).
+<p>
+That package contains both <b>MKISOFS</b> to create ISO CD-ROM images and
+<b>CDRECORD</b> to actually burn an ISO image onto (SCSI based) CD-ROM recorders
+(for ATAPI based recorders, please read the CDRecord/2 instructions for more
+details, basically you have to use Daniela Engert's <b>DANIS506.ADD</b> and
+<b>DANIATAPI.FLT</b>)).
+<p>
+<li>As the OS/2 installation CD-ROM (and likely many other CD-ROMs too) is not
+conforming to the ISO-9660 CD-ROM standard regarding the characters used for
+filenames and the directory depth, I would recommend to use another version of 
+<a href="http://hobbes.nmsu.edu/pub/os2/apps/mmedia/cd/cd-r/mkisofs-1.14a04-hpfs-a2.zip"><b>MKISOFS</b></a>
+that supports the HPFS filename convention on CD-ROMs too.
+<p>
+<li>You have to create an image from the bootable 2.88MB media, e.g. by running
+<b>SAVEDSKF x: d:\cdboot.img /D/A</b> (the options ensure that the image is a 1:1
+image of the media being 2949120 bytes in size).
+If you want to use <b>VMDISK</b> you would then have to remove the first 8 bytes
+from the resulting image file.
+<p>
+<li>Prepare the OS/2 installation files you want to have on the bootable OS/2
+installation CD-ROM.
+You can use the non-bootable OS/2 installation diskette, for e.g. MCP the root directory
+looks like:
+</font>
+<xmp>
+The volume label in drive d is WARP_4_CP.
+The Volume Serial Number is A519:2392.
+Directory of R:\
+
+16.11.00  10.25      <DIR>           0  .
+16.11.00  10.25      <DIR>           0  ..
+16.11.00   7.15         11           0  OS2SE20.SRC
+16.11.00   9.07      <DIR>           0  bitmaps
+16.11.00   8.10      <DIR>           0  books
+16.11.00   9.30      <DIR>           0  bootimgs
+ 5.09.00  12.10       1937           0  cdinst.bat
+ 5.09.00  12.10       1903           0  cdinst.cmd
+15.11.00  19.45      38912           0  chkinst.exe
+16.11.00   7.47      <DIR>           0  cid
+16.11.00   7.14      <DIR>           0  diskimgs
+ 6.09.00  12.43       9459           0  dmf_ps2.cmd
+16.11.00   8.05      <DIR>           0  ibminst
+16.11.00   8.05      <DIR>           0  info
+ 3.04.00  15.42        956           0  install.cmd
+16.11.00   9.07      <DIR>           0  options
+16.11.00   9.19      <DIR>           0  os2image
+10.11.00  14.39       4802           0  readme.add
+10.11.00  14.39     112965           0  readme.txt
+16.11.00   8.05      <DIR>           0  report
+15.11.00  19.48     476592           0  rspinst.exe
+15.11.00  19.48      81271           0  sample.rsp
+15.11.00  22.01     130672           0  vcu.exe
+15.11.00  19.45       1760           0  vcu.msg
+       24 file(s)     861240 bytes used
+                           0 bytes free
+</xmp>
+<font Face="Helv,Helvetica,Arial">
+<p>
+<li>Next you have to add the image of the bootable OS/2 2.88MB media, I would recommend
+for a bootable OS/2 installation CD-ROM to just replace the original one, as that most likely works
+(for bootable DOS CD-ROMs it does not matter, as the bootable DOS diskette is everything
+you need to run, while a bootable OS/2 does not fit on a single 2.88MB media an thus the 
+OS/2 kernel has to rely on a known layout).
+To avoid copying the complete CD-ROM onto a writeable media you might want to use the IBM
+EWS <a href="http://hobbes.nmsu.edu/pub/os2/system/drivers/filesys/tvfs211.zip">TVFS 
+(Toronto Virtual File System)</a> which
+allows you to define symbolic links like in UNIX (I personally could not live without
+that utility)!
+<p>
+<li>Next you prepare the directory structure of your bootable OS/2 installation CD-ROM.
+I used <b>TVFS</b> and the following batchfile to setup a bootable Aurora Convenience
+Pack (ACP) installation CD-ROM:
+</font>
+<xmp>
+tvmount x:
+tvlink -r x:\OS2SE20.SRC           i:\OS2SE20.SRC 
+tvlink -r x:\bitmaps               i:\bitmaps     
+tvlink -r x:\books                 i:\books 
+md x:\bootimgs
+tvlink -r x:\cdinst.bat            i:\cdinst.bat  
+tvlink -r x:\cdinst.cmd            i:\cdinst.cmd  
+tvlink -r x:\chkinst.exe           i:\chkinst.exe 
+tvlink -r x:\cid                   i:\cid         
+tvlink -r x:\diskimgs              i:\diskimgs    
+tvlink -r x:\dmf_ps2.cmd           i:\dmf_ps2.cmd 
+tvlink -r x:\ibminst               i:\ibminst     
+tvlink -r x:\info                  i:\info        
+tvlink -r x:\install.cmd           i:\install.cmd 
+tvlink -r x:\options               i:\options     
+tvlink -r x:\os2image              i:\os2image    
+tvlink -r x:\readme.add            i:\readme.add  
+tvlink -r x:\readme.txt            i:\readme.txt  
+tvlink -r x:\report                i:\report      
+tvlink -r x:\rspinst.exe           i:\rspinst.exe 
+tvlink -r x:\sample.rsp            i:\sample.rsp  
+tvlink -r x:\vcu.exe               i:\vcu.exe     
+tvlink -r x:\vcu.msg               i:\vcu.msg     
+tvlink -r x:\bootimgs\disk_0_1.img F:\CDBOOT.IMG
+tvlink -r x:\bootimgs\disk_2.img   i:\bootimgs\disk_2.img
+tvlink -r x:\bootimgs\CONFIG.SYS   i:\bootimgs\CONFIG.SYS
+</xmp>
+<font Face="Helv,Helvetica,Arial">
+When using a 800MB CD-R media, you may also add the following two lines to include
+Java 1.1.8 and the Warp Toolkit from the bootable CD-ROM on your bootable OS/2 
+installation CD-ROM (assume that that CD-ROM is inserted into drive <b>j:</b>):
+</font>
+<xmp>
+tvlink -r x:\java118               j:\java118     
+tvlink -r x:\toolkit               j:\toolkit
+</xmp>
+<font Face="Helv,Helvetica,Arial">
+<p>
+Drive <b>x:</b> is the virtual drive obtained with <b>TVFS</b>, <b>i:</b> is the drive
+the original non-bootable ACP installation CD-ROM was inserted, and 
+<b>F:\CDBOOT.IMG</b> contained the image taken with <b>SAVEDSKF</b> from the virtual
+2.88MB drive supported from <b>VFDISK</b> onto which I uncompressed the original
+<b>i:\bootimgs\disk_0_1.img</b> and modified it with CD Boot/2.
+<p>
+You can see from above example that I replaced the original bootable 2.88MB disk
+image by the one modified with CD Boot/2.
+In case you wonder why I have done that, well the OS/2 kernel seems to contain
+some logic to be able to find <b>disk_2.img</b> on the CD-ROM after having been
+booted from the bootable <b>disk_0_1.img</b> image on the CD-ROM.
+If you boot from that CD-ROM and use F3 to exit to an OS/2 fullscreen, you'll
+notice that a DIR A: will show the contents of disk_2.img (not disk_0_1.img), 
+and e.g. DIR D: will show the CD-ROM contents.
+Thus I think bootable OS/2 CD-ROMs require some support in the kernel to work,
+and I doubt that is available for versions earlier than Warp3.
+<p>
+<li>Now it's time to create the bootable OS/2 installation CD-ROM image using 
+the HPFS filename convention supporting version of <b>MKISOFS</b> by running e.g.
+<b>mkisofs -D -national -hpfsnames -o o:\acp.raw -b bootimgs/disk_0_1.img -c BOOT.CAT -v -v -allow-lowercase -no-iso-translate -V WSEB_CP x:/</b>
+which results in (you might need to check the options to ensure you really
+add the files to the image identical to the source, 
+but above ones are a good starting point, e.g. creation of a complete bootable
+OS/2 installation CD-ROM from both Convenience CDs on a single 800 MB CD-ROM failed
+unless I additionally used the <b>-dao</b> parameter too):
+</font>
+<xmp>
+Using ".mkisofsrc"
+Warning: creating filesystem that does not conform to ISO-9660.
+mkisofs 1.14a04 (i386-pc-os2_emx)
+Scanning x:/
+...
+Cache hit for /..
+...
+38 1477 x:/bootimgs/disk_0_1.img
+...
+Size of boot image is 5760 sectors -> Emulating a 2.88 meg floppy
+Total extents scheduled to be written = nnnn
+Total translation table size: nnnn
+Total rockridge attributes bytes: 0
+Total directory bytes: nnnn
+Path table size(bytes): nn
+Max brk space used nnnnn
+nnnnnn extents written (nnn Mb)
+</xmp>
+<font Face="Helv,Helvetica,Arial">
+The ISO CD-ROM image <b>o:\acp.raw</b> will be build from the files at the path
+<b>x:/</b> that also contains the image of the bootable OS/2 2.88MB media prepared 
+with CD Boot/2.
+<p>
+One word about case sensitivity.
+<b>MKISOFS</b> is, well let's say peculiar, regarding how you specify the bootable image
+and if you don't use the correct case you easily get the (not really helpful) error message
+<b>mkisofs: Uh oh, I cant find the boot image 'bootimgs/DISK_0_1.IMG' !</b>.
+The best way to find the correct case of the bootable image is to look how <b>MKISOFS</b>
+displayed the filename (that's why I recommend to use the verbose options <b>-v -v</b>),
+in above example it displayed <b>x:/bootimgs/disk_0_1.img</b> so you have to currectly specify
+<b>-b bootimgs/disk_0_1.img</b> and not <b>-b bootimgs/Disk_0_1.Img</b> or any other combination.
+<p>
+Unfortunately the case that <b>MKISOFS</b> displays with the verbose options does not
+necessarily reflect what you see when using the command <b>DIR</b> against the bootable
+image.
+It depends on the filesystem (and here you can have a FAT, a HPFS, a TVFS, a Network,
+a NFS, a EXT2, a FTPIFS, a ... drive), and while OS/2 is not case sensitive but just
+case preserving (that means that OS/2 references always the same file ABC regardless if you
+spell it ABC, abc, Abc, aBC, ...) <b>MKISOFS</b> does see the thinks differently, most
+likely as a result from its UNIX roots (where the filesystems are case sensitive!).
+<p>
+<li>Now burn that ISO CD-ROM image onto a CD-R or CD-RW using e.g. <b>CDRECORD</b> or
+the good old <b>Unite CD-Maker</b>.
+I don't go into the details here, as buring a ISO CD-ROM image usually is straight
+forward for all burning software, for <b>CDRECORD</b> you may start with the command
+<b>mkisofs -v dev=0,4,0 speed=8 o:\acp.raw</b>.
+<p>
+One comment about burning CD-Rs or CD-RWs larger than 650 MB (74 minutes).
+At least on the CD-writer I used (Plextor 121032S) 700 MB and 800 MB CDs failed
+to be burned correctly, even when using the test mode using the <b>-dummy</b>
+parameter, unless I also supplied the <b>-dao</b> parameter.
+In other words the command that worked for me to burn a bootable OS/2 installation
+CD-ROM that contained the both base CDs IBM shipps onto a 800 MB CD-R was
+<b>cdrecord -v -dev=1,4,0 speed=8 fs=32000000 -dao o:\acp.raw</b>.
+<p>
+I recommend to burn every CD in test mode or onto a CD-RW to avoid wasting CD-Rs
+if possible, and with burning speeds of 4x or more it only takes a few minutes
+extra.
+<p>
+<li>If you really want to be sure everything worked correctly I would recommend to compare
+the original CD-ROM with the newly created one.
+<a href="http://www.geocities.com/SiliconValley/Pines/7885/Download/DownloadXComp.html">XComp/2</a> and
+<a href="http://www.geocities.com/SiliconValley/Pines/7885/Download/DownloadIsoComp.html">IsoComp/2</a>,
+(2 other utilities done by me ;-) were exactly written to make such compares easily.
+<p>
+From my personal experience, it is not too unlikely that for 5 to 10 CD-Rs or CD-RWs
+you burn 1 might have problems either just in some CD-ROM drives or in any.
+You may look onto the 
+<a href="http://www.geocities.com/SiliconValley/Pines/7885/Download/DownloadXComp.html">XComp/2</a> or
+<a href="http://www.geocities.com/SiliconValley/Pines/7885/Download/DownloadIsoComp.html">IsoComp/2</a>
+pages to find some items describing why that may happen.
+So, be on the safe side and do the comparism!
+<p>
+<li>And finally, insert your new bootable OS/2 CD-ROM into a CD-ROM drive, if not
+already done so change your BIOS settings to allow booting from CD-ROMs and restart
+your PC.
+Hopefully you'll see CD Boot/2's menu immediately after BIOS started booting from the
+CD-ROM.
+<p>
+I could successfully install Aurora Convenience Pack from the bootable OS/2 installation
+CD-ROM I created according to the steps above!
+</ol> 
+<p>
+P.S. I'm a native German speaker, so please excuse my intermittent misuse of the English
+language in my programs and documentations.
+<p>
+<hr size=5>
+(C) <a href="mailto:Roman_Stangl@at.ibm.com">Roman Stangl</a> (Roman_Stangl@at.ibm.com), 29.01.2001
+<br>
+Last update: 22.05.2002
+</body>
+</html>
+

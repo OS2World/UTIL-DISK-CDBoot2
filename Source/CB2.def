@@ -1,0 +1,10 @@
+LIBRARY     CB2
+
+Description '$@#(C) Roman_Stangl@at.ibm.com:2.00 (05, 2002) (CB2.dll)#@CD Boot/2'
+
+PROTMODE
+
+EXPORTS
+        ulSignature             @1
+        CB2Main                 @2
+

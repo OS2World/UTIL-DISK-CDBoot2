@@ -1,0 +1,239 @@
+[0: H:\programming\cdboot2\source]nmake Clean
+
+Operating System/2 Program Maintenance Utility
+Version 3.00.013 Nov 17 1995
+Copyright (C) IBM Corporation 1988-1995
+Copyright (C) Microsoft Corp. 1988-1991
+All rights reserved.
+
+Cleaning up the source directory for a new build
+SYS0002: The system cannot find the file specified.
+Error occurred while processing: *.ini.
+SYS0005: Access is denied.
+Error occurred while processing: *.obj.
+
+[0: H:\programming\cdboot2\source]nmake "CD2BOOT=1"
+
+Operating System/2 Program Maintenance Utility
+Version 3.00.013 Nov 17 1995
+Copyright (C) IBM Corporation 1988-1995
+Copyright (C) Microsoft Corp. 1988-1991
+All rights reserved.
+
+        ml /Fl /Sa /c CD2Boot.asm
+Microsoft (R) Macro Assembler Version 6.00
+Copyright (C) Microsoft Corp 1981-1991.  All rights reserved.
+
+ Assembling: CD2Boot.asm
+        link CD2Boot.obj /TINY /MAP, CD2Boot.com;
+
+Microsoft (R) Segmented-Executable Linker  Version 5.13
+Copyright (C) Microsoft Corp 1984-1991.  All rights reserved.
+
+        copy CD2Boot.com CD2Boot
+        1 file(s) copied.
+
+[0: H:\programming\cdboot2\source]nmake "CDBOOT=1"
+
+Operating System/2 Program Maintenance Utility
+Version 3.00.013 Nov 17 1995
+Copyright (C) IBM Corporation 1988-1995
+Copyright (C) Microsoft Corp. 1988-1991
+All rights reserved.
+
+        icc /c /Tdp /G5 /Ti /Gs /O     /Se /Ms     /Rn /ss /W3 /D__PM__ /FoCDBoo
+t2PM.obj CDBoot2.cpp
+IBM VisualAge C++ for OS/2, Version 3
+(C) Copyright IBM Corp. 1991, 1995.
+- Licensed Materials - Program Property of IBM - All Rights Reserved.
+
+        icc /c /Tdp /G5 /Ti /Gs /O     /Se /Ms     /Rn /ss /W3 /D__PM__ /FoUStar
+tupPM.obj UStartup.cpp
+IBM VisualAge C++ for OS/2, Version 3
+(C) Copyright IBM Corp. 1991, 1995.
+- Licensed Materials - Program Property of IBM - All Rights Reserved.
+
+        echo CDBoot2PM.obj UStartupPM.obj printf.obj  >  CDBootPM.l
+        echo CDBootPM.exe                           >> CDBootPM.l
+        echo CDBootPM.map                           >> CDBootPM.l
+        echo CPPON30 + OS2386                             >> CDBootPM.l
+        echo CDBootPM.def                           >> CDBootPM.l
+        RC -i . -r CDBootPM.rc
+Operating System/2 Resource Compiler
+Version 3.00.011 May 30 1995
+(C) Copyright IBM Corporation 1988-1995
+(C) Copyright Microsoft Corp. 1985-1995
+All rights reserved.
+
+
+Creating binary resource file CDBootPM.RES
+RC:  RCPP -E -D RC_INVOKED -W4 -f CDBootPM.rc -ef H:\TOOLKT45\bin\RCPP.ERR -I .
+-I . -I .\Source -I H:\ibmcpp30\iocsrc\include -I H:\IBMCPP30\INCLUDE -I H:\TOOL
+KT45\speech\h -I H:\TOOLKT45\som\include -I H:\TOOLKT45\inc -I H:\TOOLKT45\h\gl
+-I H:\TOOLKT45\h -I H:\TOOLKT45\h\libc -I . -I Z:\MASM\INCLUDE -I D:\JAVA11\INCL
+UDE -I D:\JAVA11\INCLUDE -I D:\JAVA11\INCLUDE\OS2
+
+CDBootPM.rc....
+        1 file(s) copied.
+        BuildLevel CDBootPM.def CDBoot2.hpp
+
+Module definition file CDBootPM.def successfully modified
+
+        ILINK /NOFREE /DEBUG /NOE /NOD /ALIGN:16 /MAP /NOI /E    /PACKC:0x40000
+@CDBootPM.l
+
+IBM(R) Linker for OS/2(R), Version 01.08.r1a_CTC308c
+(C) Copyright IBM Corporation 1988, 1997.
+(C) Copyright Microsoft Corp. 1988, 1989.
+ - Licensed Material - Program-Property of IBM - All Rights Reserved.
+
+Object Modules [.obj]: CDBoot2PM.obj UStartupPM.obj printf.obj
+Run File [CDBoot2PM.*]: CDBootPM.exe
+Map File [CDBootPM.map]: CDBootPM.map
+Libraries [.lib]: CPPON30 + OS2386
+Definitions File [nul.def]: CDBootPM.def
+        rc CDBootPM.res CDBootPM.exe
+Operating System/2 Resource Compiler
+Version 3.00.011 May 30 1995
+(C) Copyright IBM Corporation 1988-1995
+(C) Copyright Microsoft Corp. 1985-1995
+All rights reserved.
+
+
+Reading binary resource file CDBootPM.res
+
+.....
+Writing resources to OS/2 v2.0 Linear .EXE file
+Writing 1 PRELOAD resource object(s)
+  Writing:  2448 bytes in 1 page(s)
+    1.1 (2448 bytes)
+Writing 2 DEMAND resource object(s)
+  Writing:  58780 bytes in 15 page(s)
+    2.2 (58780 bytes)
+  Writing:  976 bytes in 1 page(s)
+    100.4 (945 bytes)
+    1.11 (28 bytes)
+Writing 448 bytes of module format directive
+Writing Extended Attributes:  Default Icon
+Writing Extended Attributes:  Checksum
+
+        MKMSGF CB2Us.txt CB2Us.msg /l 9,1,ENU /P 437
+
+Operating System/2 Make Message File Utility (MKMSGF)
+Version 4.00.007 May 12 1999
+Copyright (C) IBM Corporation 1987, 1990, 1993-1999
+Copyright (C) Microsoft Corp. 1987, 1990
+All rights reserved.
+
+        MKMSGF CB2Gr.txt CB2Gr.msg /l 7,1,DEU /P 437
+
+Operating System/2 Make Message File Utility (MKMSGF)
+Version 4.00.007 May 12 1999
+Copyright (C) IBM Corporation 1987, 1990, 1993-1999
+Copyright (C) Microsoft Corp. 1987, 1990
+All rights reserved.
+
+        icc /c /Tdp /G5 /Ti /Gs /O     /Se /Ms     /Rn /ss /W3 /D__AVIO__ /FoCDB
+oot2.obj CDBoot2.cpp
+IBM VisualAge C++ for OS/2, Version 3
+(C) Copyright IBM Corp. 1991, 1995.
+- Licensed Materials - Program Property of IBM - All Rights Reserved.
+
+        icc /c /Tdp /G5 /Ti /Gs /O     /Se /Ms     /Rn /ss /W3 /D__AVIO__ /FoUSt
+artup.obj UStartup.cpp
+IBM VisualAge C++ for OS/2, Version 3
+(C) Copyright IBM Corp. 1991, 1995.
+- Licensed Materials - Program Property of IBM - All Rights Reserved.
+
+        echo CDBoot2.obj UStartup.obj printf.obj    >  CDBoot.l
+        echo CDBoot.exe                             >> CDBoot.l
+        echo CDBoot.map                             >> CDBoot.l
+        echo CPPON30 + OS2386                             >> CDBoot.l
+        echo CDBoot.def                             >> CDBoot.l
+        BuildLevel CDBoot.def CDBoot2.hpp
+
+Module definition file CDBoot.def successfully modified
+
+        ILINK /NOFREE /DEBUG /NOE /NOD /ALIGN:16 /MAP /NOI /E    /PACKC:0x40000
+@CDBoot.l
+
+IBM(R) Linker for OS/2(R), Version 01.08.r1a_CTC308c
+(C) Copyright IBM Corporation 1988, 1997.
+(C) Copyright Microsoft Corp. 1988, 1989.
+ - Licensed Material - Program-Property of IBM - All Rights Reserved.
+
+Object Modules [.obj]: CDBoot2.obj UStartup.obj printf.obj
+Run File [CDBoot2.*]: CDBoot.exe
+Map File [CDBoot.map]: CDBoot.map
+Libraries [.lib]: CPPON30 + OS2386
+Definitions File [nul.def]: CDBoot.def
+        icc /c /Tdp /G5 /Ti /Gs /O     /Se /Ms /Re     /ss /W3     /Ge- /D__AVIO
+__ /FoCB2.obj CB2.cpp
+IBM VisualAge C++ for OS/2, Version 3
+(C) Copyright IBM Corp. 1991, 1995.
+- Licensed Materials - Program Property of IBM - All Rights Reserved.
+
+        echo CB2.obj UStartup.obj printf.obj        >  CB2.l
+        echo CB2.dll                                >> CB2.l
+        echo CB2.map                                >> CB2.l
+        echo CPPOM30 + OS2386                                >> CB2.l
+        echo CB2.def                                >> CB2.l
+        BuildLevel CB2.def CDBoot2.hpp
+
+Module definition file CB2.def successfully modified
+
+        ILINK /NOFREE /DEBUG /NOE /NOD /ALIGN:16 /MAP /NOI /E    /PACKC:0x40000
+@CB2.l
+
+IBM(R) Linker for OS/2(R), Version 01.08.r1a_CTC308c
+(C) Copyright IBM Corporation 1988, 1997.
+(C) Copyright Microsoft Corp. 1988, 1989.
+ - Licensed Material - Program-Property of IBM - All Rights Reserved.
+
+Object Modules [.obj]: CB2.obj UStartup.obj printf.obj
+Run File [CB2.*]: CB2.dll
+Map File [CB2.map]: CB2.map
+Libraries [.lib]: CPPOM30 + OS2386
+Definitions File [nul.def]: CB2.def
+        icc /c /Tdp /G5 /Ti /Gs /O     /Se /Ms /Re     /ss /W3     /Ge- /D__PM__
+ /FoCB2PM.obj CB2.cpp
+IBM VisualAge C++ for OS/2, Version 3
+(C) Copyright IBM Corp. 1991, 1995.
+- Licensed Materials - Program Property of IBM - All Rights Reserved.
+
+        echo CB2PM.obj UStartupPM.obj printf.obj    >  CB2PM.l
+        echo CB2PM.dll                              >> CB2PM.l
+        echo CB2.map                                >> CB2PM.l
+        echo CPPOM30 + OS2386                                >> CB2PM.l
+        echo CB2PM.def                              >> CB2PM.l
+        BuildLevel CB2PM.def CDBoot2.hpp
+
+Module definition file CB2PM.def successfully modified
+
+        ILINK /NOFREE /DEBUG /NOE /NOD /ALIGN:16 /MAP /NOI /E    /PACKC:0x40000
+@CB2PM.l
+
+IBM(R) Linker for OS/2(R), Version 01.08.r1a_CTC308c
+(C) Copyright IBM Corporation 1988, 1997.
+(C) Copyright Microsoft Corp. 1988, 1989.
+ - Licensed Material - Program-Property of IBM - All Rights Reserved.
+
+Object Modules [.obj]: CB2PM.obj UStartupPM.obj printf.obj
+Run File [CB2PM.*]: CB2PM.dll
+Map File [CB2PM.map]: CB2.map
+Libraries [.lib]: CPPOM30 + OS2386
+Definitions File [nul.def]: CB2PM.def
+
+[0: H:\programming\cdboot2\source]nmake Install
+
+Operating System/2 Program Maintenance Utility
+Version 3.00.013 Nov 17 1995
+Copyright (C) IBM Corporation 1988-1995
+Copyright (C) Microsoft Corp. 1988-1991
+All rights reserved.
+
+Copying CD2BOOT to ..
+Copying CDBOOT*.EXE to ..
+Copying CB2*.DLL to ..
+Copying CB2*.MSG to ..
+
